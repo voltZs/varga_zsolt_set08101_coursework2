@@ -1,0 +1,41 @@
+{
+  "name": "varga_zsolt_set08101_coursework2",
+  "version": "1.0.0",
+  "description": "Vent blog project for Edinburgh Napier University's Web Technologies module.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voltZs/varga_zsolt_set08101_coursework2.git"
+  },
+  "keywords": [
+    "blog",
+    "vent",
+    "vent",
+    "blog",
+    "zsolt",
+    "varga",
+    "edinburgh",
+    "napier",
+    "university",
+    "server",
+    "coursework",
+    "web",
+    "tech"
+  ],
+  "author": "Zsolt Varga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voltZs/varga_zsolt_set08101_coursework2/issues"
+  },
+  "homepage": "https://github.com/voltZs/varga_zsolt_set08101_coursework2#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.11",
+    "request": "^2.85.0"
+  }
+}
