@@ -1,0 +1,64 @@
+<% include partials/header %>
+      <div class="leftContainer">
+          <div class="bubble backShadow">
+          <div class="bubbleTop siteBlue menuTypeface whiteText">
+            <strong>Create new VENT group</strong>
+          </div>
+          <div class="bubbleContent sitePale">
+            <!-- <div class="ventBody">
+              Some information about the group here. Maybe some rules
+              or type of vents people should be adding into the group. The text
+              in here is justified, and uses the same format as every other vent
+              by having the ventBody class!
+            </div> -->
+            <form action="/newgroup" method="post" id="newgroupForm">
+              <input type="text" name="groupName" placeholder="group name">
+              <input type="text" name="keywords" placeholder="keywords separated by commas">
+              <textarea name="groupDescription" rows="8" cols="80" placeholder="description and rules of group"></textarea>
+            </form>
+          </div>
+          <div class="bubbleBottom sitePale">
+            <button type="submit" form="newgroupForm" value="Register"
+            class="formButton siteBlue  whiteText">
+              Create Group
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- righandside sidebar -->
+      <div class="rightContainer">
+        <div class="bubble backShadow" id="staticPostsBubble">
+          <div class="bubbleTop siteBlue menuTypeface whiteText">
+            Saved Vents
+          </div>
+          <div class="bubbleBottom siteBlue menuTypeface whiteText">
+            Originals
+          </div>
+        </div>
+
+        <div class="bubble backShadow" id="myGroupsBubble">
+          <div class="bubbleTop siteBlue menuTypeface whiteText">
+            <strong>GROUPS</strong>
+          </div>
+          <div class="bubbleContent sitePale menuTypeface blueText">
+            Public
+          </div>
+          <div class="bubbleContent sitePale menuTypeface blueText">
+            Waiters United
+          </div>
+          <div class="bubbleContent sitePale menuTypeface blueText">
+            There is no god
+          </div>
+          <div class="bubbleContent sitePale menuTypeface blueText">
+            Dogs
+          </div>
+          <div class="bubbleBottom siteBlue menuTypeface whiteText">
+            + Create New
+          </div>
+        </div>
+      </div>
+
+
+<% include partials/footer %>

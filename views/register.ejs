@@ -1,0 +1,21 @@
+<% include partials/header %>
+      <div class="bubble backShadow formBubble" id="groupDescription">
+        <div class="bubbleTop siteBlue menuTypeface whiteText">
+          <strong>Register to VENT</strong>
+        </div>
+        <div class="bubbleContent sitePale">
+          <form action="/register" method="post" id="registerForm">
+            <input type="text" name="username" placeholder="username">
+            <input type="email" name="email" placeholder="e-mail address">
+            <input type="password" name="password" placeholder="password">
+          </form>
+        </div>
+        <div class="bubbleBottom sitePale">
+          <button type="submit" form="registerForm" value="Register"
+          class="formButton siteBlue  whiteText">
+            Register
+          </button>
+        </div>
+      </div>
+
+<% include partials/footer %>

@@ -1,0 +1,20 @@
+<% include partials/header %>
+      <div class="bubble backShadow formBubble" id="groupDescription">
+        <div class="bubbleTop siteBlue menuTypeface whiteText">
+          <strong>Log into your VENT account</strong>
+        </div>
+        <div class="bubbleContent sitePale">
+          <form action="/login" method="post" id="loginForm">
+            <input type="email" name="email" placeholder="e-mail address">
+            <input type="password" name="password" placeholder="password">
+          </form>
+        </div>
+        <div class="bubbleBottom sitePale">
+          <button type="submit" form="loginForm" value="Submit"
+          class="formButton siteBlue  whiteText">
+            Log In
+          </button>
+        </div>
+      </div>
+
+<% include partials/footer %>

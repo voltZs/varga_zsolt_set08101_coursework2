@@ -1,10 +1,16 @@
 html{
+  position: absolute;
+  min-width: 100%;
   height: 100%;
 }
+
 body{
+  position: relative;
+  font-family: Arial;
   margin: 0;
   height: 100%;
 }
+
 .background{
   position: fixed;
   left: 0;
@@ -25,28 +31,59 @@ body{
 .mainContainer{
   position: relative;
   margin: 0 auto;
+  height: auto !important;
+  padding-bottom: 90px; /*for footer */
+  min-height: 100%;
   width: 60%;
   min-width: 650px;
+  box-sizing: border-box;
 }
 
 .leftContainer{
-  position: absolute;
   display: inline-block;
   width: 62%;
   box-sizing: border-box;
-  height: 500px;
 }
 
 .rightContainer{
-  position: absolute;
-  top: 70px;
-  right: 0;
   display: inline-block;
   float: right;
   width: 35%;
-  height: 400px;
   box-sizing: border-box;
 }
+
+/*  SORT BY FUNCTIONALITY STYLING*/
+.sortByContainer{
+  position: relative;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 0 16px 16px 16px;
+  width: 100%;
+  color: rgba(0,0,0, 0.55);
+  display: table;
+}
+.SortByTag{
+  position: relative;
+  vertical-align: top;
+  top: 0;
+}
+span.SortByTag span{
+  display: inline-block;
+  vertical-align: top;
+}
+span.SortByTag svg{
+  display: inline-block;
+  vertical-align: top;
+}
+div.sortByContainer div.sortBySelection{
+  display: inline-block;
+  margin-left: 10px;
+}
+div.sortBySelection span{
+  display: block;
+}
+
+
 
 .backShadow{
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 0px 30px rgba(0, 0, 0, 0.15);
@@ -78,17 +115,71 @@ body{
 }
 
 .siteBlue{
-  background-color: #4894D6;
+  background-color: rgba(48, 126, 193, 1);
+  /* background-color: #4894D6; */
 }
 
 .sitePale{
   background-color: #EDF5F9;
 }
 .whiteText{
-    color: white;
+  color: white;
 }
 .blueText{
-    color: #4894D6;
+  color: rgba(48, 126, 193, 1);
+  /* color: #4894D6; */
+}
+
+input{
+  background-color: rgba(255,255,255, 0.8);
+  border: none;
+  font-size: 16px;
+  margin: 0 auto 7px auto;
+  display: block;
+  width: 100%;
+  height: 25px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+input[type=password]{
+  margin: 0 auto ;
+}
+
+input:focus{
+  outline: none;
+}
+
+textarea{
+  box-sizing: border-box;
+  border: none;
+  width: 100%;
+  height: 190px;
+  text-align: justify;
+  margin: 0 auto;
+  display: block;
+  padding: 5px 15px;
+  font-size: 16px;
+  text-align: center;
+  resize: none;
+}
+
+textarea:focus{
+  outline: none;
+}
+
+.formBubble{
+  width: 70%;
+  margin: 0 auto;
+}
+
+.formButton{
+  margin: 0 auto;
+  display: block;
+  height: 25px;
+  min-width: 20%;
+  border: none;
+  font-size: 15px;
 }
 
 .menuTypeface{
@@ -100,4 +191,21 @@ body{
   text-align: center;
   font-family: Arial;
   font-weight: 600;
+}
+
+.footer{
+  color: rgba(0,0,0, 0.55);
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 40px;
+}
+
+hr{
+  border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }

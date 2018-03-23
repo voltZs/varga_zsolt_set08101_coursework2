@@ -1,0 +1,96 @@
+/* All the selectors are divs with class that and that. This is because the
+specificity needs to be higher than that of <a> tags they are nested in */
+
+.navbarBlue{
+  background-color: rgba(48, 126, 193, 1);
+}
+
+div.navBarContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  margin: 0;
+  padding: 0 20px;
+  z-index: 1;
+  min-width: 650px;
+  box-sizing: border-box;
+}
+
+div.navBarField{
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 10px;
+  transition: all 0.3s;
+  font-weight: bold;
+  color:white;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+div.navBarField:hover{
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+div.navBarRightSide{
+  float: right;
+}
+
+div.dropDownContainer{
+  position: fixed;
+  top: 35px;
+  right: 0px;
+  margin-right: 20px;
+  float:right;
+  height:0;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+div.dropDownVisible{
+  height: 105px;
+  opacity: 1;
+}
+
+div.dropDownMenu{
+    background-color: rgba(255,255,255, 0.2);
+    opacity: inherit;
+}
+
+div.dropDownItem{
+  height: 0px;
+  line-height: 0px;
+  padding: 0 10px;
+  transition: all 0.3s;
+  font-weight: bold;
+  font-size: 0px;
+  color: white;
+}
+
+div.dropDownItemLarge{
+  height: 35px;
+  line-height: 35px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+div.dropDownItem:hover{
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+div.navBarActive{
+  background-color: rgba(255, 255, 255, 0.25);
+  font-size: 18px;
+  line-height: 40px;
+}

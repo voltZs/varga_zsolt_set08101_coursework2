@@ -26,12 +26,12 @@ app.get("/groups", function(req, res){
   res.render("manageGroups");
 });
 
-app.get("/groups/:groupID", function(req, res){
-  res.render("insideAGroup");
+app.get("/groups/newgroup", function(req,res){
+  res.render("newGroup");
 });
 
-app.get("groups/newgroup", function(req,res){
-  res.render("newGroup");
+app.get("/groups/:groupID", function(req, res){
+  res.render("insideAGroup");
 });
 
 app.get("/login", function(req,res){
