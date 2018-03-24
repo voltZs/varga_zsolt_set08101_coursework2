@@ -1,0 +1,28 @@
+<% include partials/header %>
+      <div class="leftContainer">
+          <div class="bubble backShadow">
+          <div class="bubbleTop siteBlue menuTypeface whiteText">
+            <strong>Create new VENT</strong>
+          </div>
+          <div class="bubbleContent sitePale">
+            <form action="/vent/newvent" method="post" id="newVentForm">
+              <textarea name="ventBody" rows="8" cols="80" placeholder="Just let it out."></textarea>
+            </form>
+          </div>
+          <div class="bubbleBottom sitePale">
+            <button type="submit" form="newVentForm" value="Vent"
+            class="formButton siteBlue  whiteText">
+              VENT!
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- righandside sidebar -->
+      <div class="rightContainer">
+        <% include partials/sidebar %>
+      </div>
+
+
+<% include partials/footer %>

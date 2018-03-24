@@ -1,0 +1,75 @@
+<% include partials/header %>
+      <div class="leftContainer">
+
+        <div class="bubble backShadow" id="selectedVent">
+          <div class="bubbleTop sitePale edgeBar">
+            <span class="edgeTopLeft">
+              20th Feb 2018
+            </span>
+          </div>
+          <div class="bubbleContent sitePale">
+            <div class="ventBody">
+              This is a VENT! I am so angry!!! AAAH!
+            </div>
+          </div>
+          <div class="bubbleBottom sitePale edgeBar">
+            <span class="edgeBotLeft">
+              <i class="fas fa-comment fa-sm"></i>
+              50 Comments
+            </span>
+            <span class="edgeBotRight">
+              Favourited by 21
+              <i class="far fa-star fa-sm"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--  COMMENTS -->
+        <div class="bubble siteTransp" id="commentsPane">
+          <div class="bubbleTop  edgeBar">
+            <span class="edgeTopLeft">
+              Comments:
+            </span>
+          </div>
+          <div class="bubbleContent">
+            <div class="ventBody">
+
+              <div class="commentBubble sitePale ">
+                <div class="bubbleTop edgeBar">
+                  <span class="edgeTopLeft">
+                    Username
+                  </span>
+                </div>
+                <div class="bubbleContent">
+                  <div class="ventBody">
+                    This is a comment...
+                  </div>
+                </div>
+              </div>
+
+              <div class="commentBubble sitePale ">
+                <div class="bubbleTop edgeBar">
+                  <span class="edgeTopLeft">
+                    Username
+                  </span>
+                </div>
+                <div class="bubbleContent">
+                  <div class="ventBody">
+                    This is a comment...
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- righandside sidebar -->
+      <div class="rightContainer">
+        <% include partials/sidebar %>
+      </div>
+
+
+<% include partials/footer %>

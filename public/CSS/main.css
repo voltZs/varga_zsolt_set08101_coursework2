@@ -52,6 +52,14 @@ body{
   box-sizing: border-box;
 }
 
+div.selectionWhite:hover{
+  background-color: rgba(48, 126, 193, 0.1);
+}
+div.selectionBlue:hover{
+  /* background-color: #6092D1; */
+  background-color: rgba(48, 126, 193, 0.85);
+}
+
 /*  SORT BY FUNCTIONALITY STYLING*/
 .sortByContainer{
   position: relative;
@@ -61,6 +69,9 @@ body{
   width: 100%;
   color: rgba(0,0,0, 0.55);
   display: table;
+}
+.sortByContainer:hover{
+  cursor: pointer;
 }
 .SortByTag{
   position: relative;
@@ -78,6 +89,7 @@ span.SortByTag svg{
 div.sortByContainer div.sortBySelection{
   display: inline-block;
   margin-left: 10px;
+  transition: height 0.5s;
 }
 div.sortBySelection span{
   display: block;
@@ -91,6 +103,12 @@ div.sortBySelection span{
 
 .bubble{
   border-radius: 20px;
+  margin-bottom: 25px;
+}
+
+.commentBubble{
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .bubbleTop{
@@ -105,7 +123,6 @@ div.sortBySelection span{
   border-bottom-left-radius:20px;
   border-bottom-right-radius:20px;
   box-sizing: border-box;
-  margin-bottom: 25px;
 }
 
 .bubbleContent{
@@ -122,9 +139,15 @@ div.sortBySelection span{
 .sitePale{
   background-color: #EDF5F9;
 }
+
+.siteTransp{
+  background-color: rgb(237, 245, 249, 0.4);
+}
+
 .whiteText{
   color: white;
 }
+
 .blueText{
   color: rgba(48, 126, 193, 1);
   /* color: #4894D6; */
@@ -154,7 +177,7 @@ textarea{
   box-sizing: border-box;
   border: none;
   width: 100%;
-  height: 190px;
+  height: 120px;
   text-align: justify;
   margin: 0 auto;
   display: block;
@@ -180,6 +203,9 @@ textarea:focus{
   min-width: 20%;
   border: none;
   font-size: 15px;
+}
+.formButton:hover{
+  cursor: pointer;
 }
 
 .menuTypeface{

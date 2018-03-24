@@ -13,7 +13,7 @@
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
-            <span class="comments">
+            <span class="edgeBotLeft">
               <i class="fas fa-hashtag fa-sm"></i>
               3459 Vents
             </span>
@@ -21,12 +21,12 @@
         </div>
 
         <!-- sort by selection -->
-        <div class="sortByContainer">
+        <div class="sortByContainer" id="sortContainer">
           <span class="SortByTag">
             <i class="fas fa-sort sm"></i>
             <span>Sort by:</span>
           </span>
-          <div class="sortBySelection">
+          <div class="sortBySelection" id="sortSelection">
             <span>Newest</span>
             <span>Oldest</span>
             <span>Most Popular</span>
@@ -37,7 +37,7 @@
         <!-- one of these for each post -->
         <div class="bubble backShadow">
           <div class="bubbleTop sitePale edgeBar">
-            <span class="ventDate">
+            <span class="edgeTopLeft">
               20th Feb 2018
             </span>
           </div>
@@ -47,11 +47,11 @@
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
-            <span class="comments">
+            <span class="edgeBotLeft">
               <i class="fas fa-comment fa-sm"></i>
               50 Comments
             </span>
-            <span class="favourited">
+            <span class="edgeBotRight">
               Favourited by 21
               <i class="far fa-star fa-sm"></i>
             </span>
@@ -60,7 +60,7 @@
         <!-- one of these for each post -->
         <div class="bubble backShadow">
           <div class="bubbleTop sitePale edgeBar">
-            <span class="ventDate">
+            <span class="edgeTopLeft">
               20th Feb 2018
             </span>
           </div>
@@ -70,11 +70,11 @@
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
-            <span class="comments">
+            <span class="edgeBotLeft">
               <i class="fas fa-comment fa-sm"></i>
               50 Comments
             </span>
-            <span class="favourited">
+            <span class="edgeBotRight">
               Favourited by 21
               <i class="far fa-star fa-sm"></i>
             </span>
@@ -83,7 +83,7 @@
         <!-- one of these for each post -->
         <div class="bubble backShadow">
           <div class="bubbleTop sitePale edgeBar">
-            <span class="ventDate">
+            <span class="edgeTopLeft">
               20th Feb 2018
             </span>
           </div>
@@ -93,50 +93,25 @@
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
-            <span class="comments">
+            <span class="edgeBotLeft">
               <i class="fas fa-comment fa-sm"></i>
               50 Comments
             </span>
-            <span class="favourited">
+            <span class="edgeBotRight">
               Favourited by 21
               <i class="far fa-star fa-sm"></i>
             </span>
           </div>
         </div>
       </div>
+
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <div class="bubble backShadow" id="staticPostsBubble">
-          <div class="bubbleTop siteBlue menuTypeface whiteText">
-            Saved Vents
-          </div>
-          <div class="bubbleBottom siteBlue menuTypeface whiteText">
-            Originals
-          </div>
-        </div>
-
-        <div class="bubble backShadow" id="myGroupsBubble">
-          <div class="bubbleTop siteBlue menuTypeface whiteText">
-            <strong>GROUPS</strong>
-          </div>
-          <div class="bubbleContent sitePale menuTypeface blueText">
-            Public
-          </div>
-          <div class="bubbleContent sitePale menuTypeface blueText">
-            Waiters United
-          </div>
-          <div class="bubbleContent sitePale menuTypeface blueText">
-            There is no god
-          </div>
-          <div class="bubbleContent sitePale menuTypeface blueText">
-            Dogs
-          </div>
-          <div class="bubbleBottom siteBlue menuTypeface whiteText">
-            + Create New
-          </div>
-        </div>
+        <% include partials/sidebar %>
       </div>
+
+      <script type="text/javascript" src="/JS/sorting.js"></script>
 
 
 <% include partials/footer %>
