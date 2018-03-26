@@ -2,113 +2,68 @@
       <div class="leftContainer">
           <div class="bubble backShadow" id="groupDescription">
           <div class="bubbleTop siteBlue menuTypeface whiteText">
-            <strong>Name of Group HERE</strong>
+            <strong>
+              <%= ventGroup.name %>
+            </strong>
           </div>
           <div class="bubbleContent sitePale">
             <div class="ventBody">
-              Some information about the group here. Maybe some rules
-              or type of vents people should be adding into the group. The text
-              in here is justified, and uses the same format as every other vent
-              by having the ventBody class!
+              <%= ventGroup.description %>
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
             <span class="edgeBotLeft">
               <i class="fas fa-hashtag fa-sm"></i>
-              3459 Vents
+              <%= ventGroup.vents.length %> Vents
             </span>
           </div>
         </div>
 
-        <!-- sort by selection -->
-        <div class="sortByContainer" id="sortContainer">
-          <span class="SortByTag">
-            <i class="fas fa-sort sm"></i>
-            <span>Sort by:</span>
-          </span>
-          <div class="sortBySelection" id="sortSelection">
-            <span>Newest</span>
-            <span>Oldest</span>
-            <span>Most Popular</span>
-          </div>
+        <% include partials/sorting %>
 
-        </div>
+        <% for(var i=0; i < ventGroup.vents.length; i++){ %>
+          <div class="bubble backShadow">
+            <div class="bubbleTop sitePale edgeBar">
+              <span class="edgeTopLeft">
+                <%= ventGroup.vents[i].date %>
+              </span>
+            </div>
+            <div class="bubbleContent sitePale">
+              <div class="ventBody">
+                <%= ventGroup.vents[i].content %>
+              </div>
+            </div>
+            <div class="bubbleBottom sitePale edgeBar">
+              <span class="edgeBotLeft">
+                <i class="fas fa-comment fa-sm"></i>
+                <%= ventGroup.vents[i].comments.length %>
+                <% if(ventGroup.vents[i].comments.length > 1){ %>
+                  Comments
+                <% } else {%>
+                  Comment
+                <% } %>
+              </span>
+              <span class="edgeBotRight">
+                <%= ventGroup.vents[i].favourited %>
+                <i class="far fa-star fa-sm"></i>
+              </span>
+            </div>
+          </div>
+        <% } %>
 
-        <!-- one of these for each post -->
-        <div class="bubble backShadow">
-          <div class="bubbleTop sitePale edgeBar">
-            <span class="edgeTopLeft">
-              20th Feb 2018
-            </span>
-          </div>
-          <div class="bubbleContent sitePale">
-            <div class="ventBody">
-              This is a VENT! I am so angry!!! AAAH!
-            </div>
-          </div>
-          <div class="bubbleBottom sitePale edgeBar">
-            <span class="edgeBotLeft">
-              <i class="fas fa-comment fa-sm"></i>
-              50 Comments
-            </span>
-            <span class="edgeBotRight">
-              Favourited by 21
-              <i class="far fa-star fa-sm"></i>
-            </span>
-          </div>
-        </div>
-        <!-- one of these for each post -->
-        <div class="bubble backShadow">
-          <div class="bubbleTop sitePale edgeBar">
-            <span class="edgeTopLeft">
-              20th Feb 2018
-            </span>
-          </div>
-          <div class="bubbleContent sitePale">
-            <div class="ventBody">
-              This is a VENT! I am so angry!!! AAAH!
-            </div>
-          </div>
-          <div class="bubbleBottom sitePale edgeBar">
-            <span class="edgeBotLeft">
-              <i class="fas fa-comment fa-sm"></i>
-              50 Comments
-            </span>
-            <span class="edgeBotRight">
-              Favourited by 21
-              <i class="far fa-star fa-sm"></i>
-            </span>
-          </div>
-        </div>
-        <!-- one of these for each post -->
-        <div class="bubble backShadow">
-          <div class="bubbleTop sitePale edgeBar">
-            <span class="edgeTopLeft">
-              20th Feb 2018
-            </span>
-          </div>
-          <div class="bubbleContent sitePale">
-            <div class="ventBody">
-              This is a VENT! I am so angry!!! AAAH!
-            </div>
-          </div>
-          <div class="bubbleBottom sitePale edgeBar">
-            <span class="edgeBotLeft">
-              <i class="fas fa-comment fa-sm"></i>
-              50 Comments
-            </span>
-            <span class="edgeBotRight">
-              Favourited by 21
-              <i class="far fa-star fa-sm"></i>
-            </span>
-          </div>
-        </div>
+
       </div>
-
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
         <% include partials/sidebar %>
+        <a href=" <%= "/groups/" + ventGroup._id + "/vent/new" %> ">
+          <div class="bubble backShadow siteBlue selectionBlue">
+            <div class="bubbleTop menuTypeface whiteText">
+              Add new VENT
+            </div>
+          </div>
+        </a>
       </div>
 
       <script type="text/javascript" src="/JS/sorting.js"></script>

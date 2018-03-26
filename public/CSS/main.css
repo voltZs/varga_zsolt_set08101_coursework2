@@ -52,13 +52,16 @@ body{
   box-sizing: border-box;
 }
 
-div.selectionWhite:hover{
+.selectionWhite:hover{
   background-color: rgba(48, 126, 193, 0.1);
 }
-div.selectionBlue:hover{
+.selectionBlue:hover{
   /* background-color: #6092D1; */
   background-color: rgba(48, 126, 193, 0.85);
 }
+
+
+
 
 /*  SORT BY FUNCTIONALITY STYLING*/
 .sortByContainer{
@@ -94,6 +97,11 @@ div.sortByContainer div.sortBySelection{
 div.sortBySelection span{
   display: block;
 }
+div.sortBySelection span:hover{
+  color: rgba(0,0,0, 0.8);
+}
+
+
 
 
 

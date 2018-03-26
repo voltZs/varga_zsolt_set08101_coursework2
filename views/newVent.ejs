@@ -2,11 +2,16 @@
       <div class="leftContainer">
           <div class="bubble backShadow">
           <div class="bubbleTop siteBlue menuTypeface whiteText">
-            <strong>Create new VENT</strong>
+            <strong>Add VENT to <%= ventGroup.name %> </strong>
           </div>
           <div class="bubbleContent sitePale">
-            <form action="/vent/newvent" method="post" id="newVentForm">
-              <textarea name="ventBody" rows="8" cols="80" placeholder="Just let it out."></textarea>
+            <div class="">
+              <span>Rant</span>
+              <span>Confession</span>
+              <span>Ridiculous</span>
+            </div>
+            <form action="/vent?category=rant&group=fff> " method="post" id="newVentForm">
+              <textarea name="content" rows="8" cols="80" placeholder="Just let it out."></textarea>
             </form>
           </div>
           <div class="bubbleBottom sitePale">
