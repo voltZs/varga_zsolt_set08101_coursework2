@@ -13,6 +13,7 @@
   font-family: Arial;
   font-weight: bold;
 }
+
 .edgeTopLeft{
   position: absolute;
   bottom: 15%;
@@ -25,6 +26,10 @@
   left: 18px;
   display: inline-block;
   float: left;
+}
+
+.clickableEdgeItem:hover{
+  color: rgba(0,0,0, 0.8);
 }
 
 .edgeBotRight{

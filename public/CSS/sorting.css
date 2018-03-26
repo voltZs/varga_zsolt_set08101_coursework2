@@ -1,0 +1,37 @@
+/*  SORT BY FUNCTIONALITY STYLING*/
+.sortByContainer{
+  display: inline-block !important;
+  position: relative;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 0 16px 16px 16px;
+  color: rgba(0,0,0, 0.55);
+  display: table;
+}
+.sortByContainer:hover{
+  cursor: pointer;
+}
+.SortByTag{
+  position: relative;
+  vertical-align: top;
+  top: 0;
+}
+span.SortByTag span{
+  display: inline-block;
+  vertical-align: top;
+}
+span.SortByTag svg{
+  display: inline-block;
+  vertical-align: top;
+}
+div.sortByContainer div.sortBySelection{
+  display: inline-block;
+  margin-left: 10px;
+  transition: height 0.5s;
+}
+div.sortBySelection span{
+  display: block;
+}
+div.sortBySelection span:hover{
+  color: rgba(0,0,0, 0.8);
+}

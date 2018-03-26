@@ -4,21 +4,29 @@
         <div class="bubble backShadow" id="selectedVent">
           <div class="bubbleTop sitePale edgeBar">
             <span class="edgeTopLeft">
-              20th Feb 2018
+              <%= foundVent.date %>
             </span>
           </div>
           <div class="bubbleContent sitePale">
             <div class="ventBody">
-              This is a VENT! I am so angry!!! AAAH!
+              <%= foundVent.content %>
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
             <span class="edgeBotLeft">
               <i class="fas fa-comment fa-sm"></i>
-              50 Comments
+              <%= foundVent.comments.length %>
+              <% if(foundVent.comments.length == 1){%>
+                Comment
+              <% } else { %>
+                Comments
+              <% } %>
             </span>
-            <span class="edgeBotRight">
-              Favourited by 21
+            <span class="edgeBotRight clickableEdgeItem">
+                <%= foundVent.favourited %>
+                <% if(!foundVent.favourited){ %>
+                  0
+                <% } %>
               <i class="far fa-star fa-sm"></i>
             </span>
           </div>
@@ -34,35 +42,53 @@
           <div class="bubbleContent">
             <div class="ventBody">
 
-              <div class="commentBubble sitePale ">
+              <% for(var i=0; i < foundVent.comments.length; i++){ %>
+                <div class="commentBubble sitePale ">
+                  <div class="bubbleTop edgeBar">
+                    <span class="edgeTopLeft">
+                      <%= foundVent.comments[i].user.username %>
+                    </span>
+                  </div>
+                  <div class="bubbleContent">
+                    <div class="ventBody">
+                      <%= foundVent.comments[i].content %>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+
+              <% if(foundVent.comments.length == 0){ %>
+                <div class="commentMessage">
+                  Be the first to comment!
+                </div>
+
+              <% } %>
+
+              <!--  COMMENT FORM -->
+              <div class="commentBubble addComment sitePale ">
                 <div class="bubbleTop edgeBar">
                   <span class="edgeTopLeft">
-                    Username
+                    Add a comment
                   </span>
                 </div>
                 <div class="bubbleContent">
                   <div class="ventBody">
-                    This is a comment...
+                    <form action="/groups/<%= ventGroupID %>/vent/<%= foundVent._id %>/comment" method="post" id="newCommentForm">
+                      <textarea name="content" rows="8" cols="80" placeholder="Don't be shy"></textarea>
+                    </form>
                   </div>
                 </div>
-              </div>
-
-              <div class="commentBubble sitePale ">
-                <div class="bubbleTop edgeBar">
-                  <span class="edgeTopLeft">
-                    Username
-                  </span>
-                </div>
-                <div class="bubbleContent">
-                  <div class="ventBody">
-                    This is a comment...
-                  </div>
+                <div class="bubbleBottom sitePale">
+                  <button type="submit" form="newCommentForm" value="CreateComment"
+                  class="formButton siteBlue  whiteText">
+                    Send
+                  </button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
+
       </div>
 
 

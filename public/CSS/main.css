@@ -11,6 +11,11 @@ body{
   height: 100%;
 }
 
+
+a{
+  color: rgba(0,0,0, 0.55);
+}
+
 .background{
   position: fixed;
   left: 0;
@@ -60,50 +65,15 @@ body{
   background-color: rgba(48, 126, 193, 0.85);
 }
 
-
-
-
-/*  SORT BY FUNCTIONALITY STYLING*/
-.sortByContainer{
-  position: relative;
-  font-weight: bold;
-  box-sizing: border-box;
-  padding: 0 16px 16px 16px;
-  width: 100%;
-  color: rgba(0,0,0, 0.55);
-  display: table;
-}
-.sortByContainer:hover{
-  cursor: pointer;
-}
-.SortByTag{
-  position: relative;
-  vertical-align: top;
-  top: 0;
-}
-span.SortByTag span{
+.addVentButton{
+  padding: 0 16px;
   display: inline-block;
-  vertical-align: top;
+  float: right;
 }
-span.SortByTag svg{
+.addVentButton span {
   display: inline-block;
-  vertical-align: top;
+  margin-left: 5px;
 }
-div.sortByContainer div.sortBySelection{
-  display: inline-block;
-  margin-left: 10px;
-  transition: height 0.5s;
-}
-div.sortBySelection span{
-  display: block;
-}
-div.sortBySelection span:hover{
-  color: rgba(0,0,0, 0.8);
-}
-
-
-
-
 
 .backShadow{
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 0px 30px rgba(0, 0, 0, 0.15);
@@ -117,6 +87,10 @@ div.sortBySelection span:hover{
 .commentBubble{
   border-radius: 20px;
   margin-bottom: 10px;
+}
+
+.addComment{
+  margin-top: 25px;
 }
 
 .bubbleTop{
@@ -161,6 +135,11 @@ div.sortBySelection span:hover{
   /* color: #4894D6; */
 }
 
+
+
+
+
+/* FORMS */
 input{
   background-color: rgba(255,255,255, 0.8);
   border: none;
@@ -172,14 +151,43 @@ input{
   box-sizing: border-box;
   text-align: center;
 }
-
 input[type=password]{
   margin: 0 auto ;
 }
-
 input:focus{
   outline: none;
 }
+button:focus{
+  outline: none;
+}
+input[type=radio]{
+  display: none;
+}
+label{
+  line-height: 18px;
+  font-size: 18px;
+  text-align: center;
+  font-family: Arial;
+  font-weight: 600;
+  color: rgba(0,0,0, 0.35);
+}
+input[type=radio]:checked + label{
+  color: rgba(0,0,0, 0.8);
+}
+.radioContainer{
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+.thirdWidthRadio{
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 33%;
+  margin: 10px 0;
+}
+
+
 
 textarea{
   box-sizing: border-box;
@@ -214,6 +222,20 @@ textarea:focus{
 }
 .formButton:hover{
   cursor: pointer;
+}
+
+
+
+
+
+
+.commentMessage{
+  text-align: center;
+  margin-top: 5px;
+  color: rgba(0,0,0, 0.3);
+  font-size: 16px;
+  font-family: Arial;
+  font-weight: bold;
 }
 
 .menuTypeface{

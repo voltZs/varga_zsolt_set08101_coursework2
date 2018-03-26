@@ -100,7 +100,7 @@ app.get("/welcome", function(req,res){
 app.get("/groups/:groupID/vent/new", function(req,res){
   var groupID = req.params.groupID;
 
-  Group.findById(groupID).populate("vents").exec(function(err, foundGroup){
+  Group.findById(groupID, function(err, foundGroup){
     if(err){
       console.log(err);
       res.render("notFound");
@@ -117,7 +117,23 @@ app.get("/groups/:groupID/vent/new", function(req,res){
 })
 
 app.get("/groups/:groupID/vent/:ventID", function(req,res){
-  res.render("vent.ejs");
+  var groupID = req.params.groupID;
+  var ventID = req.params.ventID;
+
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
+      Vent.findById(ventID).populate({path: "comments", populate: {path: "user"}}).exec(function(err, foundVent){
+        if(err){
+          console.log(err);
+        } else {
+          res.render("vent", {allGroups: allGroups, foundVent: foundVent, ventGroupID: groupID});
+
+        }
+      })
+    }
+  });
 })
 
 app.get("*", function(req,res){
@@ -137,6 +153,7 @@ app.post("/groups", function(req, res){
       if(err){
         console.log(err);
       } else {
+        console.log("DB added group: " + savedGroup);
         res.redirect("/groups/" + savedGroup._id);
       }
     })
@@ -145,12 +162,94 @@ app.post("/groups", function(req, res){
   }
 })
 
-app.post("/vent", function(req, res){
-  console.log(req.body);
-  console.log(req.params.category);
-  res.redirect("/welcome")
+app.post("/groups/:groupID/vent", function(req, res){
+  var groupID = req.params.groupID;
+
+  if(req.body.category != "" && req.body.content != ""){
+    Vent.create(req.body, function(err, savedVent){
+        if(err){
+          console.log(err);
+        } else {
+          console.log("DB added vent:" + savedVent);
+          //push vent into group's vents array
+          Group.findById(groupID, function(err, foundGroup){
+            if(err){
+              console.log(err);
+            } else {
+              foundGroup.vents.push(savedVent);
+              foundGroup.save(function(err){
+                if(err){
+                  console.log(err);
+                } else {
+                  console.log("...to group: " + foundGroup._id);
+                  // push vent into user
+                  //change this to current;y logged in user when that's implemented
+                  User.findOne({'username' : 'volt_zs'}, function(err, foundUser){
+                    if(err){
+                      console.log(err);
+                    } else {
+                      foundUser.vents.push(savedVent);
+                      foundUser.save(function(err){
+                        if(err){
+                          console.log(err);
+                        } else {
+                          console.log("...to user: " + foundUser._id);
+                          res.redirect("/groups/" + foundGroup._id + "/vent/" + savedVent._id)
+                        }
+                      })
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+  } else {
+    res.redirect("/groups/"+ groupID +"/vent/new");
+  }
 })
 
+app.post("/groups/:groupID/vent/:ventID/comment", function(req, res){
+  var groupID = req.params.groupID;
+  var ventID = req.params.ventID;
+
+  //CHANGE THIS TO THE CURRENTLY LOGGED IN USER !!!!!!!!!
+  User.findOne({'username' : "volt_zs"}, function(err, foundCommenter){
+    if(err){
+      console.log(err);
+    }else{
+      VComment.create({
+          content: req.body.content,
+          user: foundCommenter._id
+        },
+        function(err, savedComment){
+          if(err){
+            console.log(err);
+          } else {
+            //find vent and push comment into it
+            Vent.findById(ventID, function(err, foundVent){
+              if(err){
+                console.log(err);
+              } else {
+                foundVent.comments.push(savedComment);
+                foundVent.save(function(err){
+                  if(err){
+                    console.log(err);
+                  } else {
+                    console.log("DB added Vcomment: " + savedComment);
+                    console.log("...to vent ID: " + foundVent._id);
+                    res.redirect("/groups/"+ groupID + "/vent/" + ventID);
+                  }
+                })
+              }
+            })
+          }
+        }
+      )
+    }
+  })
+})
 
 
 

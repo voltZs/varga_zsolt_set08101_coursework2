@@ -5,12 +5,21 @@
             <strong>Add VENT to <%= ventGroup.name %> </strong>
           </div>
           <div class="bubbleContent sitePale">
-            <div class="">
-              <span>Rant</span>
-              <span>Confession</span>
-              <span>Ridiculous</span>
-            </div>
-            <form action="/vent?category=rant&group=fff> " method="post" id="newVentForm">
+            <form action="/groups/<%= ventGroup._id %>/vent" method="post" id="newVentForm">
+              <div class="radioContainer">
+                <div class="thirdWidthRadio">
+                     <input type="radio" name="category" value="confession" id="confessionRadio">
+                     <label for="confessionRadio">Confession</label>
+                   </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
+             --><div class="thirdWidthRadio">
+                  <input type="radio" name="category" value="rant" checked="checked" id="rantRadio">
+                  <label for="rantRadio">Rant</label>
+                </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
+             --><div class="thirdWidthRadio">
+                  <input type="radio" name="category" value="ridiculous" id="ridiculousRadio">
+                  <label for="ridiculousRadio">Ridiculous</label>
+                </div>
+              </div>
               <textarea name="content" rows="8" cols="80" placeholder="Just let it out."></textarea>
             </form>
           </div>
