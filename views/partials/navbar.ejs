@@ -5,48 +5,41 @@
           VENT
         </div>
       </a>
-      <!-- <a href="/register">
-        <div class="navBarField navBarRightSide navBarDrop">
-          Register
-        </div>
-      </a>
-      <a href="/login">
-        <div class="navBarField navBarRightSide navBarDrop">
-          Log In
-        </div>
-      </a> -->
-
-      <a href="#">
-        <div class="navBarField navBarRightSide navBarDrop">
-          <!-- <i class="fas fa-power-off"></i> -->
-          Log Out
-        </div>
-      </a>
-      <a href="#">
-        <div class="navBarField navBarRightSide navBarDrop">
-          Username
-        </div>
-      </a>
-
-
-    </div>
-
-    <!-- <div class="dropDownContainer navbarBlue backShadow">
-      <div class="dropDownMenu">
-        <a href="/logout POST">
-          <div class="dropDownItem">
-            Log Out
+      <% if(currentUser){ %>
+        <a href="/logout">
+          <div class="navBarField navBarRightSide navBarDrop">
+            <i class="fas fa-power-off"></i>
+            <!-- Log Out -->
           </div>
         </a>
-        <a href="cipherSanctusNotis.html">
-          <div class="dropDownItem">
-            Sanctus Notis
+        <div class="navBarField navBarRightSide navBarDrop">
+          <%= currentUser.username %>
+        </div>
+
+      <% } else { %>
+        <a href="/register">
+          <div class="navBarField navBarRightSide navBarDrop">
+            Register
           </div>
         </a>
-        <a href="cipherBinary.html">
-          <div class="dropDownItem">
-            Binary
+        <a href="/login">
+          <div class="navBarField navBarRightSide navBarDrop">
+            Log In
           </div>
         </a>
-      </div> -->
+      <% } %>
+
+      <!-- <% if(currentUser){ %>
+        <div class="dropDownContainer navbarBlue backShadow">
+          <div class="dropDownMenu">
+            <a href="/logout">
+              <div class="dropDownItem">
+                Log Out
+              </div>
+            </a>
+          </div>
+        </div>
+      <% } %> -->
+
+
     </div>

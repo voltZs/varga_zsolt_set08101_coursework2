@@ -30,7 +30,7 @@ div.navBarField{
   vertical-align: top;
 }
 
-div.navBarField:hover{
+a div.navBarField:hover{
   background-color: rgba(255, 255, 255, 0.8);
   color: rgba(0, 0, 0, 0.7);
   cursor: pointer;

@@ -80,6 +80,7 @@ a{
 }
 
 .bubble{
+  transition: background-color 0.4s;
   border-radius: 20px;
   margin-bottom: 25px;
 }
@@ -170,10 +171,16 @@ label{
   font-family: Arial;
   font-weight: 600;
   color: rgba(0,0,0, 0.35);
+  transition: color 0.3s;
 }
 input[type=radio]:checked + label{
   color: rgba(0,0,0, 0.8);
 }
+
+label:hover{
+  color: rgba(0,0,0, 0.8);
+}
+
 .radioContainer{
   width: 100%;
   position: relative;
@@ -221,6 +228,13 @@ textarea:focus{
   font-size: 15px;
 }
 .formButton:hover{
+  cursor: pointer;
+}
+.deleteHover{
+  transition: color 0.3s;
+}
+.deleteHover:hover{
+  color: #db4343;
   cursor: pointer;
 }
 

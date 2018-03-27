@@ -13,7 +13,8 @@ var ventSchema = mongoose.Schema({
     },
   favourited: {
     type: Number,
-    min: 0
+    min: 0,
+    default: 0
     },
   comments: [{
         type: mongoose.Schema.Types.ObjectId,

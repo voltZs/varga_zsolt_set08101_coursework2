@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var passportLocalMongoose = require("passport-local-mongoose");
 
 var userSchema = mongoose.Schema({
   username: String,
@@ -13,6 +14,8 @@ var userSchema = mongoose.Schema({
     ref: "Vent"
     }]
 });
+
+userSchema.plugin(passportLocalMongoose);
 
 var User = mongoose.model("User", userSchema);
 

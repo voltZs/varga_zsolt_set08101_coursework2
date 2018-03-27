@@ -1,36 +1,7 @@
 <% include partials/header %>
       <div class="leftContainer">
 
-        <div class="bubble backShadow" id="selectedVent">
-          <div class="bubbleTop sitePale edgeBar">
-            <span class="edgeTopLeft">
-              <%= foundVent.date %>
-            </span>
-          </div>
-          <div class="bubbleContent sitePale">
-            <div class="ventBody">
-              <%= foundVent.content %>
-            </div>
-          </div>
-          <div class="bubbleBottom sitePale edgeBar">
-            <span class="edgeBotLeft">
-              <i class="fas fa-comment fa-sm"></i>
-              <%= foundVent.comments.length %>
-              <% if(foundVent.comments.length == 1){%>
-                Comment
-              <% } else { %>
-                Comments
-              <% } %>
-            </span>
-            <span class="edgeBotRight clickableEdgeItem">
-                <%= foundVent.favourited %>
-                <% if(!foundVent.favourited){ %>
-                  0
-                <% } %>
-              <i class="far fa-star fa-sm"></i>
-            </span>
-          </div>
-        </div>
+        <% include partials/ventPartial %>
 
         <!--  COMMENTS -->
         <div class="bubble siteTransp" id="commentsPane">
@@ -73,7 +44,7 @@
                 </div>
                 <div class="bubbleContent">
                   <div class="ventBody">
-                    <form action="/groups/<%= ventGroupID %>/vent/<%= foundVent._id %>/comment" method="post" id="newCommentForm">
+                    <form action="/vent/<%= foundVent._id %>/comment" method="post" id="newCommentForm">
                       <textarea name="content" rows="8" cols="80" placeholder="Don't be shy"></textarea>
                     </form>
                   </div>

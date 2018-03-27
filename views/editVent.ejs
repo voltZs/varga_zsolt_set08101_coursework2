@@ -1,0 +1,57 @@
+<% include partials/header %>
+      <div class="leftContainer">
+          <div class="bubble backShadow">
+          <div class="bubbleTop siteBlue menuTypeface whiteText">
+            <strong>Edit VENT</strong>
+          </div>
+          <div class="bubbleContent sitePale">
+            <form action="/vent/<%= foundVent._id %>?_method=PUT" method="post" id="newVentForm">
+              <div class="radioContainer">
+                <div class="thirdWidthRadio">
+                     <input type="radio" name="category" value="confession"
+                     <% if(foundVent.category == "confession"){ %>
+                       checked="checked"
+                     <% } %> id="confessionRadio">
+                     <label for="confessionRadio">Confession</label>
+                   </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
+             --><div class="thirdWidthRadio">
+                  <input type="radio" name="category" value="rant"
+                  <% if(foundVent.category == "rant"){ %>
+                    checked="checked"
+                  <% } %> id="rantRadio">
+                  <label for="rantRadio">Rant</label>
+                </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
+             --><div class="thirdWidthRadio">
+                  <input type="radio" name="category" value="ridiculous"
+                  <% if(foundVent.category == "ridiculous"){ %>
+                    checked="checked"
+                  <% } %>id="ridiculousRadio">
+                  <label for="ridiculousRadio">Ridiculous</label>
+                </div>
+              </div>
+              <textarea name="content" rows="8" cols="80" placeholder="Just let it out." required><%= foundVent.content %></textarea>
+            </form>
+          </div>
+          <div class="bubbleBottom sitePale edgeBar">
+            <form action="/vent/<%= foundVent._id %>?_method=DELETE" method="post">
+              <span class="edgeBotLeft deleteHover" onclick="javascript:this.parentNode.submit()">
+                <i class="fas fa-trash fa-sm"></i> Delete
+              </span>
+            </form>
+
+            <button type="submit" form="newVentForm" value="Vent"
+            class="formButton siteBlue  whiteText">
+              SAVE
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- righandside sidebar -->
+      <div class="rightContainer">
+        <% include partials/sidebar %>
+      </div>
+
+
+<% include partials/footer %>

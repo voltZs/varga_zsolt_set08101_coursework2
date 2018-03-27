@@ -16,6 +16,7 @@
 
 .edgeTopLeft{
   position: absolute;
+  display: inline-block;
   bottom: 15%;
   left: 18px;
 }
@@ -28,8 +29,12 @@
   float: left;
 }
 
-.clickableEdgeItem:hover{
-  color: rgba(0,0,0, 0.8);
+.edgeTopRight{
+  position: absolute;
+  bottom: 15%;
+  right: 18px;
+  display: inline-block;
+  float: right;
 }
 
 .edgeBotRight{
@@ -38,4 +43,20 @@
   right: 18px;
   display: inline-block;
   float: right;
+}
+
+.clickableEdgeItem:hover{
+  color: rgba(0,0,0, 0.8);
+  cursor: pointer;
+}
+.rantColor:hover{
+  background-color: #db4343;
+}
+
+.confessionColor:hover{
+  background-color: #7ac13c;
+}
+
+.ridiculousColor:hover{
+  background-color: #f7ef56;
 }

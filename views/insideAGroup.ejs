@@ -28,42 +28,7 @@
           </div>
         </a>
 
-
-        <% for(var i=0; i < ventGroup.vents.length; i++){ %>
-          <div class="bubble backShadow">
-            <div class="bubbleTop sitePale edgeBar">
-              <span class="edgeTopLeft">
-                <%= ventGroup.vents[i].date %>
-              </span>
-            </div>
-            <div class="bubbleContent sitePale">
-              <div class="ventBody">
-                <%= ventGroup.vents[i].content %>
-              </div>
-            </div>
-            <div class="bubbleBottom sitePale edgeBar">
-              <a href="/groups/<%= ventGroup._id %>/vent/<%= ventGroup.vents[i]._id %>">
-                <span class="edgeBotLeft clickableEdgeItem">
-                  <i class="fas fa-comment fa-sm"></i>
-                  <%= ventGroup.vents[i].comments.length %>
-                  <% if(ventGroup.vents[i].comments.length > 1){ %>
-                    Comments
-                  <% } else {%>
-                    Comment
-                  <% } %>
-                </span>
-              </a>
-              <span class="edgeBotRight clickableEdgeItem">
-                <%= ventGroup.vents[i].favourited %>
-                <% if(!ventGroup.vents[i].favourited){ %>
-                  0
-                <% } %>
-                <i class="far fa-star fa-sm"></i>
-              </span>
-            </div>
-          </div>
-        <% } %>
-
+        <% include partials/ventPartial %>
 
       </div>
 

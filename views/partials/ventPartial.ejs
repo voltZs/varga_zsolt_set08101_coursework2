@@ -1,0 +1,78 @@
+        <% for(var i=0; i < VDisplay.length; i++){ %>
+          <div class="bubble backShadow sitePale colorableVent
+            <%=VDisplay[i].category%>Color">
+            <div class="bubbleTop edgeBar">
+              <span class="edgeTopLeft">
+                <% var timeInMinutes = (Date.now() - VDisplay[i].date) / (1000*60); %>
+                <% var timeInHours = timeInMinutes / 60;                            %>
+                <% var timeInDays = timeInHours / 24;                               %>
+                <% var timeInMonths = timeInDays / 30.4375;                         %>
+                <% var timeInYears = timeInMonths / 12;                             %>
+                <% if(timeInMinutes < 60){ %>
+                  <%= Math.floor(timeInMinutes) + " minutes ago"%>
+                <% } else if(timeInHours < 24){ %>
+                  <%= Math.floor(timeInHours) + " hours ago"%>
+                <% } else if(timeInDays < 30.4375){ %>
+                  <%= Math.floor(timeInDays) + " days ago"%>
+                <% } else if(timeInMonths < 12){ %>
+                  <%= Math.floor(timeInMonths) + " months ago"%>
+                <% } else { %>
+                  <%= Math.floor(timeInYears) + " years ago"%>
+                <% } %>
+              </span>
+
+              <% var ventsIDs = [];                                  %>
+              <% for(var j = 0; j < currentUser.vents.length; j++){  %>
+              <%   ventsIDs.push(String(currentUser.vents[j]));  %>
+              <%  %>
+              <% }                                                   %>
+              <% if(ventsIDs.includes(String(VDisplay[i]._id))){     %>
+                <a href="/vent/<%= VDisplay[i]._id %>/edit">
+                  <span class="edgeTopRight clickableEdgeItem">
+                    <i class="fas fa-pencil-alt fa-sm"></i>
+                  </span>
+                </a>
+              <% } %>
+            </div>
+            <div class="bubbleContent">
+              <div class="ventBody">
+                <%= VDisplay[i].content %>
+              </div>
+            </div>
+            <div class="bubbleBottom edgeBar">
+              <a href="/vent/<%= VDisplay[i]._id %>">
+                <span class="edgeBotLeft clickableEdgeItem">
+                  <i class="fas fa-comment fa-sm"></i>
+                  <%= VDisplay[i].comments.length         %>
+                  <% if(VDisplay[i].comments.length > 1){ %>
+                    Comments
+                  <% } else { %>
+                    Comment
+                  <% } %>
+                </span>
+              </a>
+
+
+              <% var savedIDs = [];                                  %>
+              <% for(var j = 0; j < currentUser.saved.length; j++){  %>
+              <%   savedIDs.push(String(currentUser.saved[j]));      %>
+              <% }                                                   %>
+              <% if(!savedIDs.includes(String(VDisplay[i]._id))){    %>
+                <a href="/saved/<%= VDisplay[i]._id %>/add">
+                  <span class="edgeBotRight clickableEdgeItem">
+                    <%= VDisplay[i].favourited %>
+                    <i class="far fa-star fa-sm" id="favouritedIcon"></i>
+                  </span>
+                </a>
+              <% } else { %>
+                <a href="/saved/<%= VDisplay[i]._id %>/remove">
+                  <span class="edgeBotRight clickableEdgeItem">
+                    <%= VDisplay[i].favourited %>
+                    <i class="fas fa-star fa-sm" id="favouritedIcon"></i>
+                  </span>
+                </a>
+              <% } %>
+            </div>
+          </div>
+
+        <% } %>
