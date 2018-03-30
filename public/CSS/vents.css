@@ -47,6 +47,20 @@
   float: right;
 }
 
+.edgeLeft{
+  position: absolute;
+  display: inline-block;
+  left: 18px;
+  float: left;
+}
+
+.edgeRight{
+  position: absolute;
+  display: inline-block;
+  right: 18px;
+  float: right;
+}
+
 .clickableEdgeItem{
   transition: color 0.3s;
 }

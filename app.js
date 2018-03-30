@@ -83,7 +83,54 @@ app.get("/", function(req, res){
 
 //user gets here after logging in!
 app.get("/welcome", loggedIn, function(req,res){
-  res.render("landing");
+  var yesterday = new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+
+  var limitPop;
+  if(req.query.limitPop == undefined){
+    limitPop = 3;
+  } else {
+    limitPop = parseInt(req.query.limitPop);
+  }
+  var limitRec;
+  if(req.query.limitRec == undefined){
+    limitRec = 3;
+  } else {
+    limitRec = parseInt(req.query.limitRec);
+  }
+
+  Group.find({_id: {$in: req.user.groups}}, function(err, foundGroups){
+    if(err){
+      console.log(err);
+    } else {
+      var ventIDs = [];
+      for(var i =0; i<foundGroups.length; i++){
+        for(var j = 0; j<foundGroups[i].vents.length; j++){
+          ventIDs.push(foundGroups[i].vents[j]);
+        }
+      }
+      Vent.find({_id: {$in: ventIDs}}).where('date')
+      .gt(yesterday).sort('-favourited').limit(limitPop)
+      .exec(function(err, foundVents1){
+        if(err){
+          console.log(err);
+        } else {
+          Vent.find({_id: {$in: ventIDs}}).sort('-date').limit(limitRec).exec(function(err, foundVents2){
+            if(err){
+              console.log(err);
+            } else {
+              res.render("landing", {
+                popularVents: foundVents1,
+                recentVents: foundVents2,
+                limitPop: limitPop,
+                limitRec: limitRec
+              });
+            }
+          })
+        }
+      })
+    }
+  })
 })
 
 app.get("/groups", loggedIn, function(req, res){
@@ -94,11 +141,14 @@ app.get("/groups", loggedIn, function(req, res){
     } else {
       var groups = [];
       for(var i=0; i<foundGroups.length; i++){
-        if(foundGroups[i].name.includes(searchWord) || compareKeywords(searchWord, foundGroups[i].keywords)){
-          groups.push(foundGroups[i]);
+        if(searchWord != ""){
+          if(foundGroups[i].name.includes(searchWord)
+          || compareKeywords(searchWord, foundGroups[i].keywords)){
+            groups.push(foundGroups[i]);
+          }
         }
       }
-      res.render("searchGroups", {matchedGroups: groups})
+      res.render("searchGroups", {matchedGroups: groups, currentSearch: searchWord})
     }
   })
 })
@@ -109,24 +159,40 @@ app.get("/groups/new", loggedIn, function(req,res){
 
 app.get("/groups/:groupID", loggedIn, function(req, res){
   var groupID = req.params.groupID;
+  var sortIndex = req.query.sorting;
+  if(sortIndex == undefined || sortIndex>2){
+    sortIndex = 0;
+  }
 
+  var sorting;
+  switch(parseInt(sortIndex)){
+    case 0:
+      sorting = '-date'; //newest first - descending
+      break;
+    case 1:
+      sorting = 'date'; //oldest first - ascending
+      break;
+    case 2:
+      sorting = '-favourited'; //most favourited first - descending
+      break;
+  }
   Group.findById(groupID).populate("vents").exec(function(err, foundGroup){
     if(err){
       console.log(err);
       res.render("notFound");
     } else {
-      Group.find({}, function(err){
+      Vent.find({_id: {$in: foundGroup.vents}}).sort(sorting).exec(function(err, foundVents){
         if(err){
-          console.console.log(err);
+          console.log(err);
         } else {
           res.render("insideAGroup", {
             ventGroup: foundGroup,
-            VDisplay: foundGroup.vents});   //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name
+            VDisplay: foundVents,//uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name
+            sortIndex: sortIndex});
         }
-      });
-
+      })
     }
-  });
+  })
 
 })
 
@@ -169,7 +235,7 @@ app.get("/groups/:groupID/follow", loggedIn, function(req, res){
               console.log(err);
             }
           })
-          res.redirect("/groups/" + foundGroup._id)
+          res.redirect('back');
         }
       })
     }
@@ -193,7 +259,7 @@ app.get("/groups/:groupID/unfollow", loggedIn, function(req, res){
               console.log(err);
             }
           })
-          res.redirect("/groups/" + foundGroup._id)
+          res.redirect('back');
         }
       })
     }
@@ -213,8 +279,6 @@ app.get("/saved", loggedIn, function(req, res){
           }
         }
       )
-
-
 })
 
 app.get("/originals", loggedIn, function(req, res){
@@ -503,16 +567,29 @@ app.post("/login", passport.authenticate("local", {
 
 
 app.post("/register", function(req, res){
-  User.register(new User({username: req.body.username, email: req.body.email}),
+  User.register(new User({
+        username: req.body.username,
+        email: req.body.email,
+        }),
       req.body.password,
       function(err, savedUser){
         if(err){
           console.log(err);
           return res.render('/register');
+        } else {
+          passport.authenticate('local')(req, res, function(){
+            Group.findOne({name: "VentTeam"}, function(err, foundGroup){
+              savedUser.groups.push(foundGroup._id);
+              savedUser.save(function(err){
+                if(err){
+                  console.log(err);
+                } else {
+                  res.redirect("/welcome");
+                }
+              })
+            })
+          });
         }
-        passport.authenticate('local')(req, res, function(){
-          res.redirect("/welcome");
-        });
       })
 })
 
@@ -569,18 +646,36 @@ app.put("/groups/:groupID", loggedIn, function(req, res){
 //============================== DELETE ROUTES =================================
 //==============================================================================
 
+//removing a vent also deletes all comments associated with it
 app.delete("/vent/:ventID", loggedIn, function(req, res){
   var ventID = req.params.ventID
-  Vent.findByIdAndRemove(ventID, function(err){
+  //find vent - remove comments with id in vent.comments array of ids
+  Vent.findById(ventID, function(err, foundVent){
     if(err){
       console.log(err);
       res.redirect("/vent/"+ ventID +"/edit");
     } else {
-      res.redirect("/originals");
+      VComment.remove({_id: {$in: foundVent.comments}}, function(err){
+        if(err){
+          console.log(err);
+          res.redirect("/vent/"+ ventID +"/edit");
+        } else {
+          Vent.findByIdAndRemove(foundVent._id, function(err){
+            if(err){
+              console.log(err);
+              res.redirect("/vent/"+ ventID +"/edit");
+            } else {
+              res.redirect("/originals");
+            }
+          })
+        }
+      })
     }
   })
+
 })
 
+//when deleting a group, the vents posted to it do not get removed!
 app.delete("/groups/:groupID", loggedIn, function(req, res){
   var groupID = req.params.groupID
   Group.findByIdAndRemove(groupID, function(err){

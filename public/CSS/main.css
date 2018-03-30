@@ -115,14 +115,13 @@ a{
 .bubble{
   transition: 0.3s;
   border-radius: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
   opacity: 1;
   visibility: visible;
 }
 
 .commentBubble{
   border-radius: 20px;
-  padding-bottom: 6px;
   margin-bottom: 10px;
 }
 
@@ -151,6 +150,18 @@ a{
 .bubbleContent{
   transition: 0.3s;
   padding: 6px;
+  min-height: 30px;
+  height: auto;
+  font-size: 16px;
+  line-height: normal;
+  box-sizing: border-box;
+  visibility: visible;
+  opacity: 1
+}
+
+.bubbleComContent{
+  transition: 0.3s;
+  padding: 0 6px;
   min-height: 30px;
   height: auto;
   font-size: 16px;

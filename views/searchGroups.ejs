@@ -7,7 +7,8 @@
             <i class="fas fa-search fa-sm "></i>
           </span>
           <form action="/groups" method="get">
-            <input  class="searchInput siteTransp" type="text" name="search" value="">
+            <input  class="searchInput siteTransp" type="text" name="search"
+            value="<%= currentSearch %>" placeholder="Search for groups">
           </form>
         </div>
         <div class="ventBody">
@@ -18,7 +19,46 @@
                 You can search for groups here. Just enter something in the bar
                 above.
               </div>
-            <% } else {console.log(matchedGroups)} %>
+            <% } else { %>
+            <%  for(var i =0; i < matchedGroups.length; i++){ %>
+                <div class="commentBubble sitePale">
+                  <div class="ventBody">
+                    <div class="bubbleContent edgeBar edgeBarStyle">
+                      <a href="/groups/<%= matchedGroups[i]._id %>">
+                        <div class="edgeLeft clickableEdgeItem">
+                          <%= matchedGroups[i].name %>
+                        </div>
+                      </a>
+
+                      <%if(String(matchedGroups[i].creator) !== String(currentUser._id)){ %>
+                        <% var followedGroups = currentUser.groups.map(function(group){ return String(group)}); %>
+                        <% if(followedGroups.includes(String(matchedGroups[i]._id))){ %>
+
+                          <a href="/groups/<%= matchedGroups[i]._id %>/unfollow">
+                            <span class="edgeRight clickableEdgeItem">
+                              Unfollow
+                            </span>
+                          </a>
+                        <% } else { %>
+                        <a href="/groups/<%= matchedGroups[i]._id %>/follow">
+                          <span class="edgeRight clickableEdgeItem">
+                            Follow
+                          </span>
+                        </a>
+                        <% } %>
+                      <% } else { %>
+                        <a href="/groups/<%= matchedGroups[i]._id %>/edit">
+                          <span class="edgeRight clickableEdgeItem">
+                            Edit <i class="fas fa-pencil-alt fa-sm"></i> 
+                          </span>
+                        </a>
+                      <% } %>
+
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            <% } %>
 
 
 

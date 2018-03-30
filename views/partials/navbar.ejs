@@ -12,9 +12,11 @@
             <!-- Log Out -->
           </div>
         </a>
-        <div class="navBarField navBarRightSide">
-          <%= currentUser.username %>
-        </div>
+        <a href="/welcome">
+          <div class="navBarField navBarRightSide">
+            <%= currentUser.username %>
+          </div>
+        </a>
 
       <% } else { %>
         <a href="/register">

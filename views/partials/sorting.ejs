@@ -5,8 +5,14 @@
             <span>Sort by:</span>
           </span>
           <div class="sortBySelection " id="sortSelection">
-            <span class="hoverDark">Newest</span>
-            <span class="hoverDark">Oldest</span>
-            <span class="hoverDark">Most Popular</span>
+            <a href="/groups/<%= ventGroup._id %>?sorting=0" id="newestSortLink">
+            </a>
+            <a href="/groups/<%= ventGroup._id %>?sorting=1" id="oldestSortLink">
+            </a>
+            <a href="/groups/<%= ventGroup._id %>?sorting=2" id="mostPopSortLink">
+            </a>
           </div>
+          <script type="text/javascript">
+            var index = <%= sortIndex %>;
+          </script>
         </div>

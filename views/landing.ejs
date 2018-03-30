@@ -1,6 +1,57 @@
 <% include partials/header %>
       <div class="leftContainer">
 
+        <div class="bubble sitePale grayText">
+          <div class="ventBody">
+            <div class="bubbleContent">
+
+              <h2>Welcome back, <%= currentUser.username %>!</h2>
+              <h3>We though you might want to have a look at these vents</h3>
+            </div>
+          </div>
+        </div>
+        <div class="bubble siteTransp">
+          <div class="bubbleTop  edgeBar edgeBarStyle">
+            <div class="edgeTopLeft">
+              Most starred vents in the last 24 hours
+            </div>
+          </div>
+          <div class="ventBody">
+            <div class="bubbleContent">
+              <% var VDisplay = popularVents; %>
+              <% include partials/ventPartial %>
+            </div>
+          </div>
+          <div class="bubbleBottom  edgeBar edgeBarStyle">
+            <a href="/welcome?limitPop=<%= limitPop + 3 %>">
+              <div class="contrainer100 regTextCenter clickableEdgeItem">
+                More
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="bubble siteTransp">
+          <div class="bubbleTop edgeBar edgeBarStyle">
+            <div class="edgeTopLeft">
+              And a few of the most recent vents
+            </div>
+          </div>
+          <div class="ventBody">
+            <div class="bubbleContent">
+                <% var VDisplay = recentVents; %>
+                <% include partials/ventPartial %>
+            </div>
+          </div>
+          <div class="bubbleBottom  edgeBar edgeBarStyle">
+            <a href="/welcome?limitRec=<%= limitRec + 3 %>">
+              <div class="contrainer100 regTextCenter clickableEdgeItem">
+                More
+              </div>
+            </a>
+          </div>
+        </div>
+
       </div>
 
       <!-- righandside sidebar -->

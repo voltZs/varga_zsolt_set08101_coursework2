@@ -1,15 +1,24 @@
 var sortSelection = document.getElementById("sortSelection");
 var sortContainer = document.getElementById("sortContainer");
 
-var newest = document.createElement("span");
+var newest= document.createElement("span");
 var oldest = document.createElement("span");
 var mostPop = document.createElement("span");
-newest.innerHTML = "<span> Newest </span>";
-oldest.innerHTML = "<span> Oldest </span>"
-mostPop.innerHTML = "<span> Most Popular </span>"
+
+var newestLink= document.getElementById("newestSortLink");
+var oldestLink = document.getElementById("oldestSortLink");
+var mostPopLink = document.getElementById("mostPopSortLink");
+
+newestLink.innerHTML = "<span class='hoverDark'> Newest </span>"
+newest.appendChild(newestLink);
+oldestLink.innerHTML = "<span class='hoverDark'> Oldest </span>"
+oldest.appendChild(oldestLink);
+mostPopLink.innerHTML = "<span class='hoverDark'> Most Popular </span>"
+mostPop.appendChild(mostPopLink);
 
 var sorts = [newest, oldest, mostPop];
-var currentSort = 0;
+
+var currentSort = index;
 
 var enlarged = false;
 
