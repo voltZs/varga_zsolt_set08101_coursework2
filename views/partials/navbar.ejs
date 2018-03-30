@@ -2,28 +2,28 @@
     <div class="navBarContainer navbarBlue backShadow">
       <a href="/">
         <div class="navBarField navBarActive">
-          VENT
+          VENT.
         </div>
       </a>
       <% if(currentUser){ %>
         <a href="/logout">
-          <div class="navBarField navBarRightSide navBarDrop">
+          <div class="navBarField navBarRightSide">
             <i class="fas fa-power-off"></i>
             <!-- Log Out -->
           </div>
         </a>
-        <div class="navBarField navBarRightSide navBarDrop">
+        <div class="navBarField navBarRightSide">
           <%= currentUser.username %>
         </div>
 
       <% } else { %>
         <a href="/register">
-          <div class="navBarField navBarRightSide navBarDrop">
+          <div class="navBarField navBarRightSide">
             Register
           </div>
         </a>
         <a href="/login">
-          <div class="navBarField navBarRightSide navBarDrop">
+          <div class="navBarField navBarRightSide">
             Log In
           </div>
         </a>

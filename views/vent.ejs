@@ -5,7 +5,7 @@
 
         <!--  COMMENTS -->
         <div class="bubble siteTransp" id="commentsPane">
-          <div class="bubbleTop  edgeBar">
+          <div class="bubbleTop siteTransp edgeBar edgeBarStyle">
             <span class="edgeTopLeft">
               Comments:
             </span>
@@ -15,13 +15,13 @@
 
               <% for(var i=0; i < foundVent.comments.length; i++){ %>
                 <div class="commentBubble sitePale ">
-                  <div class="bubbleTop edgeBar">
+                  <div class="bubbleTop edgeBar edgeBarStyle">
                     <span class="edgeTopLeft">
                       <%= foundVent.comments[i].user.username %>
                     </span>
                   </div>
-                  <div class="bubbleContent">
-                    <div class="ventBody">
+                  <div class="ventBody">
+                    <div class="bubbleContent">
                       <%= foundVent.comments[i].content %>
                     </div>
                   </div>
@@ -37,7 +37,7 @@
 
               <!--  COMMENT FORM -->
               <div class="commentBubble addComment sitePale ">
-                <div class="bubbleTop edgeBar">
+                <div class="bubbleTop edgeBar edgeBarStyle">
                   <span class="edgeTopLeft">
                     Add a comment
                   </span>

@@ -6,9 +6,24 @@ html{
 
 body{
   position: relative;
-  font-family: Arial;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   height: 100%;
+}
+
+h1{
+  margin: 0 0 20px 0;
+  font-size: 115px;
+  line-height: 100px;
+  font-weight: 700;
+}
+
+h2{
+  margin: 5px 0;
+  font-size:
+}
+h3{
+  margin: 8px 0;
 }
 
 
@@ -57,8 +72,26 @@ a{
   box-sizing: border-box;
 }
 
+.container100{
+  position: relative;
+  box-sizing: border-box;
+  width:100%;
+  margin: 0 0 20px 0;
+}
+
+.container33{
+  display: inline-block;
+  box-sizing: border-box;
+  width: 33%;
+}
+
+.container33.bubble{
+  margin-bottom: 10px;
+}
+
+
 .selectionWhite:hover{
-  background-color: rgba(48, 126, 193, 0.1);
+  background-color: rgba(48, 126, 193, 0.15);
 }
 .selectionBlue:hover{
   /* background-color: #6092D1; */
@@ -80,14 +113,21 @@ a{
 }
 
 .bubble{
-  transition: background-color 0.4s;
+  transition: 0.3s;
   border-radius: 20px;
   margin-bottom: 25px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .commentBubble{
   border-radius: 20px;
+  padding-bottom: 6px;
   margin-bottom: 10px;
+}
+
+.commentBubble:first-of-type{
+  margin-top: 10px;
 }
 
 .addComment{
@@ -109,9 +149,15 @@ a{
 }
 
 .bubbleContent{
+  transition: 0.3s;
   padding: 6px;
   min-height: 30px;
+  height: auto;
+  font-size: 16px;
+  line-height: normal;
   box-sizing: border-box;
+  visibility: visible;
+  opacity: 1
 }
 
 .siteBlue{
@@ -135,6 +181,32 @@ a{
   color: rgba(48, 126, 193, 1);
   /* color: #4894D6; */
 }
+
+.grayText{
+  color: rgba(0,0,0, 0.55);
+}
+
+.lightGrayText{
+  color: rgba(0,0,0, 0.3);
+}
+
+.darkGrayText{
+  color: rgba(0,0,0, 0.7)
+}
+
+.regText{
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.regTextCenter{
+  line-height: 16px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+
 
 
 
@@ -168,7 +240,6 @@ label{
   line-height: 18px;
   font-size: 18px;
   text-align: center;
-  font-family: Arial;
   font-weight: 600;
   color: rgba(0,0,0, 0.35);
   transition: color 0.3s;
@@ -179,6 +250,14 @@ input[type=radio]:checked + label{
 
 label:hover{
   color: rgba(0,0,0, 0.8);
+}
+.searchInput{
+  margin: 0 0 0 10%;
+  width: 80%;
+  display: inline-block;
+  height: 30px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .radioContainer{
@@ -216,7 +295,7 @@ textarea:focus{
 
 .formBubble{
   width: 70%;
-  margin: 0 auto;
+  margin: 0 auto  10px auto;
 }
 
 .formButton{
@@ -248,7 +327,6 @@ textarea:focus{
   margin-top: 5px;
   color: rgba(0,0,0, 0.3);
   font-size: 16px;
-  font-family: Arial;
   font-weight: bold;
 }
 
@@ -259,7 +337,6 @@ textarea:focus{
   line-height: 18px;
   font-size: 18px;
   text-align: center;
-  font-family: Arial;
   font-weight: 600;
 }
 

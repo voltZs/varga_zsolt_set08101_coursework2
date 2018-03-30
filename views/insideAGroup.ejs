@@ -1,21 +1,49 @@
 <% include partials/header %>
       <div class="leftContainer">
           <div class="bubble backShadow" id="groupDescription">
-          <div class="bubbleTop siteBlue menuTypeface whiteText">
+          <div class="bubbleTop siteBlue menuTypeface whiteText edgeBar">
             <strong>
               <%= ventGroup.name %>
             </strong>
+
+            <% if(String(currentUser._id) == String(ventGroup.creator)){ %>
+
+              <a href="/groups/<%= ventGroup._id %>/edit">
+                <span class="edgeTopRight clickableEdgeItem whiteText">
+                  <i class="fas fa-pencil-alt fa-sm"></i>
+                </span>
+              </a>
+            <% } %>
+
+
           </div>
           <div class="bubbleContent sitePale">
             <div class="ventBody">
               <%= ventGroup.description %>
             </div>
           </div>
-          <div class="bubbleBottom sitePale edgeBar">
+          <div class="bubbleBottom sitePale edgeBar edgeBarStyle">
             <span class="edgeBotLeft">
               <i class="fas fa-hashtag fa-sm"></i>
               <%= ventGroup.vents.length %> Vents
             </span>
+
+            <%if(String(ventGroup.creator) !== String(currentUser._id)){ %>
+              <% var followedGroups = currentUser.groups.map(function(group){ return String(group)}); %>
+              <% if(followedGroups.includes(String(ventGroup._id))){ %>
+                <a href="/groups/<%= ventGroup._id %>/unfollow">
+                  <span class="edgeBotRight clickableEdgeItem">
+                    Unfollow
+                  </span>
+                </a>
+              <% } else { %>
+              <a href="/groups/<%= ventGroup._id %>/follow">
+                <span class="edgeBotRight clickableEdgeItem">
+                  Follow
+                </span>
+              </a>
+              <% } %>
+            <% } %>
           </div>
         </div>
 

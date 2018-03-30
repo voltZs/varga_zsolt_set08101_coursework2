@@ -1,7 +1,7 @@
         <% for(var i=0; i < VDisplay.length; i++){ %>
-          <div class="bubble backShadow sitePale colorableVent
-            <%=VDisplay[i].category%>Color">
-            <div class="bubbleTop edgeBar">
+          <div class="bubble backShadow sitePale">
+            <div class="bubbleTop edgeBar edgeBarStyle
+              <%=VDisplay[i].category%>Color">
               <span class="edgeTopLeft">
                 <% var timeInMinutes = (Date.now() - VDisplay[i].date) / (1000*60); %>
                 <% var timeInHours = timeInMinutes / 60;                            %>
@@ -21,11 +21,7 @@
                 <% } %>
               </span>
 
-              <% var ventsIDs = [];                                  %>
-              <% for(var j = 0; j < currentUser.vents.length; j++){  %>
-              <%   ventsIDs.push(String(currentUser.vents[j]));  %>
-              <%  %>
-              <% }                                                   %>
+              <% var ventsIDs = currentUser.vents.map(function(aVent){return String(aVent)}); %>
               <% if(ventsIDs.includes(String(VDisplay[i]._id))){     %>
                 <a href="/vent/<%= VDisplay[i]._id %>/edit">
                   <span class="edgeTopRight clickableEdgeItem">
@@ -39,7 +35,7 @@
                 <%= VDisplay[i].content %>
               </div>
             </div>
-            <div class="bubbleBottom edgeBar">
+            <div class="bubbleBottom edgeBar edgeBarStyle">
               <a href="/vent/<%= VDisplay[i]._id %>">
                 <span class="edgeBotLeft clickableEdgeItem">
                   <i class="fas fa-comment fa-sm"></i>
@@ -52,11 +48,7 @@
                 </span>
               </a>
 
-
-              <% var savedIDs = [];                                  %>
-              <% for(var j = 0; j < currentUser.saved.length; j++){  %>
-              <%   savedIDs.push(String(currentUser.saved[j]));      %>
-              <% }                                                   %>
+              <% var savedIDs = currentUser.saved.map(function(aVent){return String(aVent)}); %>
               <% if(!savedIDs.includes(String(VDisplay[i]._id))){    %>
                 <a href="/saved/<%= VDisplay[i]._id %>/add">
                   <span class="edgeBotRight clickableEdgeItem">

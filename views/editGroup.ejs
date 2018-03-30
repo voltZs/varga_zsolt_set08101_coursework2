@@ -1,0 +1,36 @@
+<% include partials/header %>
+      <div class="leftContainer">
+          <div class="bubble backShadow">
+          <div class="bubbleTop siteBlue menuTypeface whiteText">
+            <strong>Edit Group: <%= ventGroup.name %></strong>
+          </div>
+          <div class="bubbleContent sitePale">
+            <form action="/groups/<%= ventGroup._id %>?_method=PUT" method="post" id="editGroupForm">
+              <input type="text" name="name" placeholder="group name" value="<%= ventGroup.name %>">
+              <input type="text" name="keywords" placeholder="add new keywords separated by commas">
+              <textarea name="description" rows="8" cols="80" placeholder="description and rules of group"><%= ventGroup.description %></textarea>
+            </form>
+          </div>
+          <div class="bubbleBottom sitePale edgeBar">
+            <form action="/groups/<%= ventGroup._id %>?_method=DELETE" method="post">
+              <span class="edgeBotLeft deleteHover grayText" onclick="javascript:this.parentNode.submit()">
+                <i class="fas fa-trash fa-sm"></i> Delete
+              </span>
+            </form>
+
+            <button type="submit" form="editGroupForm" value="Vent"
+            class="formButton siteBlue  whiteText">
+              SAVE
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- righandside sidebar -->
+      <div class="rightContainer">
+        <% include partials/sidebar %>
+      </div>
+
+
+<% include partials/footer %>

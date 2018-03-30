@@ -1,0 +1,36 @@
+<% include partials/header %>
+
+    <div class="leftContainer">
+      <div class="bubble siteTransp">
+        <div class="bubbleTop siteTransp edgeBar edgeBarStyle">
+          <span class="edgeTopLeft">
+            <i class="fas fa-search fa-sm "></i>
+          </span>
+          <form action="/groups" method="get">
+            <input  class="searchInput siteTransp" type="text" name="search" value="">
+          </form>
+        </div>
+        <div class="ventBody">
+          <div class="bubbleContent">
+
+            <% if(matchedGroups.length == 0){ %>
+              <div class="commentMessage">
+                You can search for groups here. Just enter something in the bar
+                above.
+              </div>
+            <% } else {console.log(matchedGroups)} %>
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- righandside sidebar -->
+      <div class="rightContainer">
+        <% include partials/sidebar %>
+      </div>
+<% include partials/footer %>

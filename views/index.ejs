@@ -1,0 +1,80 @@
+<% include partials/header %>
+      <div class="<% if(currentUser){ %> leftContainer <% } else { %> container100<% } %>">
+        <div class="grayText">
+          <h1>VENT.</h1>
+        </div>
+        <div class="bubble sitePale backShadow">
+          <div class="ventBody">
+            <div class="bubbleContent grayText">
+              <h3>As the name may suggest, Vent is a platform for unwinding and
+                venting! We like to think of it as a social network where everyone
+                and anyone can speak their mind without being judged.</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="container100 grayText">
+          <div class="container100">
+
+            <h2>Key is category</h2>
+          </div>
+
+          <div class="container33 bubble sitePale" id="rantVentDesc">
+            <div class="bubbleContent">
+
+            </div>
+          </div><!--
+       --><div class="container33 bubble sitePale" id="confessVentDesc">
+            <div class="bubbleContent">
+
+            </div>
+          </div><!--
+       --><div  class="container33 bubble sitePale" id="ridicVentDesc">
+            <div class="bubbleContent">
+
+            </div>
+          </div>
+
+          <div class="container100 regTextCenter">
+
+            <h3>Hover over vent for more info</h3>
+          </div>
+
+        </div>
+
+        <div class="bubble sitePale  backShadow">
+          <div class="ventBody">
+            <div class="bubbleContent grayText">
+              <h3>You may find groups with topics that interest you and feel free
+                to vent! We do, however, ask you to be respectful. Some groups will
+                have their own rules set by the creator.</h3>
+            </div>
+          </div>
+        </div>
+
+        <% if(!currentUser){ %>
+          <div class="lightGrayText regTextCenter">
+            <h2>
+              <a href="/login" class="clickableEdgeItem">
+                Log in
+              </a>
+               or
+               <a href="/register" class="clickableEdgeItem">
+                 Register
+               </a>
+                to get started.</h2>
+          </div>
+        <% } %>
+
+      </div>
+      <% if(currentUser){ %>
+        <!-- righandside sidebar -->
+        <div class="rightContainer">
+
+          <% include partials/sidebar %>
+        </div>
+      <% } %>
+
+
+
+<% include partials/footer %>

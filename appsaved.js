@@ -43,33 +43,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //every route should pass the currently loggen in user in
-//also the logged in user's followed groups for the sidebar (allGroups) AND the groups the user created
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
-  if(req.user){
-    Group.find({_id: {$in: req.user.groups}}, function(err, followedGroups){
-      if(err){
-        console.log(err);
-      } else {
-        Group.find({creator: req.user._id}, function(err, myGroups){
-          if(err){
-            console.log(err);
-          } else {
-            res.locals.allFollowed = followedGroups;
-            res.locals.allMine = myGroups;
-            next();
-          }
-        })
-      }
-    })
-
-  } else {
-    res.locals.allGroups = null;
-    res.locals.allMine = null;
-    next();
-  }
+  next();
 })
-
 
 
 
@@ -78,36 +55,41 @@ app.use(function(req, res, next){
 //==============================================================================
 //this one is the about page basically
 app.get("/", function(req, res){
-  res.render("index");
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
+      res.render("index", {allGroups: allGroups});
+    }
+  });
 })
 
 //user gets here after logging in!
 app.get("/welcome", loggedIn, function(req,res){
-  res.render("landing");
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
+      res.render("landing", {allGroups: allGroups});
+    }
+  });
 })
 
 app.get("/groups", loggedIn, function(req, res){
-  var searchWord= req.query.search;
-  Group.find({}, function(err, foundGroups){
-    if(err){
-      console.log(err);
-    } else {
-      var groups = [];
-      for(var i=0; i<foundGroups.length; i++){
-        if(foundGroups[i].name.includes(searchWord) || compareKeywords(searchWord, foundGroups[i].keywords)){
-          groups.push(foundGroups[i]);
-        }
-      }
-      res.render("searchGroups", {matchedGroups: groups})
-    }
-  })
+  res.render("manageGroups");
 })
 
 app.get("/groups/new", loggedIn, function(req,res){
-  res.render("newGroup");
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
+      res.render("newGroup", {allGroups: allGroups});
+    }
+  });
 })
 
-app.get("/groups/:groupID", loggedIn, function(req, res){
+app.get("/groups/:groupID", function(req, res){
   var groupID = req.params.groupID;
 
   Group.findById(groupID).populate("vents").exec(function(err, foundGroup){
@@ -115,11 +97,12 @@ app.get("/groups/:groupID", loggedIn, function(req, res){
       console.log(err);
       res.render("notFound");
     } else {
-      Group.find({}, function(err){
+      Group.find({}, function(err, allGroups){
         if(err){
           console.console.log(err);
         } else {
           res.render("insideAGroup", {
+            allGroups: allGroups,
             ventGroup: foundGroup,
             VDisplay: foundGroup.vents});   //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name
         }
@@ -132,7 +115,7 @@ app.get("/groups/:groupID", loggedIn, function(req, res){
 
 app.get("/groups/:groupID/edit", loggedIn, function(req, res){
   var groupID = req.params.groupID;
-  Group.find({}, function(err){
+  Group.find({}, function(err, allGroups){
     if(err){
       console.log(err);
     } else {
@@ -140,60 +123,11 @@ app.get("/groups/:groupID/edit", loggedIn, function(req, res){
         //check if logged in user is admin, fi not redirect!
         if(String(req.user._id) == String(foundGroup.creator)){
           res.render("editGroup", {
+            allGroups: allGroups,
             ventGroup: foundGroup
           })
         } else {
-          res.render("userError", {
-            msg: "You do not have permission to edit this group"
-          })
-        }
-      })
-    }
-  })
-})
-
-app.get("/groups/:groupID/follow", loggedIn, function(req, res){
-  var groupID = req.params.groupID;
-
-  Group.findById(groupID, function(err, foundGroup){
-    if(err){
-      console.log(err);
-    } else {
-      User.findById(req.user._id, function(err, foundUser){
-        if(err){
-          console.log(err);
-        } else {
-          foundUser.groups.push(foundGroup);
-          foundUser.save(function(err){
-            if(err){
-              console.log(err);
-            }
-          })
-          res.redirect("/groups/" + foundGroup._id)
-        }
-      })
-    }
-  })
-})
-
-app.get("/groups/:groupID/unfollow", loggedIn, function(req, res){
-  var groupID = req.params.groupID;
-
-  Group.findById(groupID, function(err, foundGroup){
-    if(err){
-      console.log(err);
-    } else {
-      User.findById(req.user._id, function(err, foundUser){
-        if(err){
-          console.log(err);
-        } else {
-          foundUser.groups.pull({_id : foundGroup._id});
-          foundUser.save(function(err){
-            if(err){
-              console.log(err);
-            }
-          })
-          res.redirect("/groups/" + foundGroup._id)
+          render("userError", {msg: "You do not have permission to edit this group", allGroups: allGroups})
         }
       })
     }
@@ -202,34 +136,44 @@ app.get("/groups/:groupID/unfollow", loggedIn, function(req, res){
 
 app.get("/saved", loggedIn, function(req, res){
 
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
       User.findById(req.user._id).populate("vents").populate("saved").exec(
         function(err, foundUser){
           if(err){
             console.log(err);
           } else {
             res.render("insideSaved", {
+              allGroups: allGroups,
               VDisplay: foundUser.saved   //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name, must be an array
             });
           }
         }
       )
-
-
+    }
+  })
 })
 
 app.get("/originals", loggedIn, function(req, res){
-
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
       User.findById(req.user._id).populate("vents").populate("saved").exec(
         function(err, foundUser){
           if(err){
             console.log(err);
           } else {
             res.render("insideOriginals", {
+              allGroups: allGroups,
               VDisplay: foundUser.vents})  //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name, must be an array
           }
         }
       )
-
+    }
+  })
 })
 
 app.get("/groups/:groupID/vent/new", loggedIn, function(req,res){
@@ -240,7 +184,15 @@ app.get("/groups/:groupID/vent/new", loggedIn, function(req,res){
       console.log(err);
       res.render("notFound");
     } else {
-      res.render("newVent", {ventGroup: foundGroup})
+      Group.find({}, function(err, allGroups){
+        if(err){
+          console.console.log(err);
+        } else {
+          res.render("newVent", {
+            ventGroup: foundGroup,
+            allGroups: allGroups})
+        }
+      })
     }
   });
 })
@@ -248,32 +200,44 @@ app.get("/groups/:groupID/vent/new", loggedIn, function(req,res){
 app.get("/vent/:ventID", loggedIn, function(req,res){
   var ventID = req.params.ventID;
 
-  Vent.findById(ventID).populate({path: "comments", populate: {path: "user"}}).exec(
-    function(err, foundVent){
-      if(err){
-        console.log(err);
-      } else {
-        res.render("vent", {
-          foundVent: foundVent,
-          VDisplay: [foundVent]
-        })
-      }
+  Group.find({}, function(err, allGroups){
+    if(err){
+      console.console.log(err);
+    } else {
+      Vent.findById(ventID).populate({path: "comments", populate: {path: "user"}}).exec(
+        function(err, foundVent){
+          if(err){
+            console.log(err);
+          } else {
+            res.render("vent", {
+              allGroups: allGroups,
+              foundVent: foundVent,
+              VDisplay: [foundVent]})
+          }
+        }
+      )
     }
-  )
+  });
 })
 
 app.get("/vent/:ventID/edit", loggedIn, function(req, res){
   var ventID = req.params.ventID;
 
-  Vent.findById(ventID, function(err, foundVent){
+  Group.find({}, function(err, allGroups){
     if(err){
-      console.log(err);
+      console.console.log(err);
     } else {
-      res.render("editVent", {
-        foundVent: foundVent})
+      Vent.findById(ventID, function(err, foundVent){
+        if(err){
+          console.log(err);
+        } else {
+          res.render("editVent", {
+            allGroups: allGroups,
+            foundVent: foundVent})
+        }
+      })
     }
-  })
-
+  });
 })
 
 app.get("/saved/:ventID/add", loggedIn, function(req, res){
@@ -368,10 +332,9 @@ app.get("/logout", function(req, res){
 
 app.get("*", function(req,res){
   if(req.isAuthenticated()){
-    res.render("userError", {msg: "There's nothing here"})
-  } else {
-    res.render("nonUserError", {msg: "There's nothing here"});
+    res.render("userError", {msg: "There's nothing here"});
   }
+  res.render("nonUserError", {msg: "There's nothing here"});
 })
 
 
@@ -534,37 +497,6 @@ app.put("/vent/:ventID", loggedIn, function(req, res){
     })
 })
 
-app.put("/groups/:groupID", loggedIn, function(req, res){
-  var groupID = req.params.groupID;
-
-  Group.findById(groupID, function(err, foundGroup){
-    if(err){
-      console.log(err);
-    } else {
-      var keywords = keywordsIntoArray(req.body.keywords);
-      for(var i=0; i<keywords.length; i++){
-        foundGroup.keywords.push(keywords[i]);
-      }
-      foundGroup.save(function(err){
-        if(err){
-          console.log(err);
-        }
-      })
-    }
-  })
-
-  Group.findByIdAndUpdate(groupID,{
-    name: req.body.name,
-    description: req.body.description},
-    function(err, savedGroup){
-      if(err){
-        console.log(err);
-      } else {
-        res.redirect("/groups/" + savedGroup._id)
-      }
-    })
-})
-
 //==============================================================================
 //============================== DELETE ROUTES =================================
 //==============================================================================
@@ -581,44 +513,22 @@ app.delete("/vent/:ventID", loggedIn, function(req, res){
   })
 })
 
-app.delete("/groups/:groupID", loggedIn, function(req, res){
-  var groupID = req.params.groupID
-  Group.findByIdAndRemove(groupID, function(err){
-    if(err){
-      console.log(err);
-      res.redirect("/groups/"+ groupID +"/edit");
-    } else {
-      res.redirect("/welcome");
-    }
-  })
-})
 
-
-//middleware to check if user is logged in - if not, redirect to login ROUTE
-function loggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    next();
-  } else {
-    res.redirect("/login");
-  }
-}
-
-//turn string of keywords separated by commas or commas with a space to array of keywords
-function keywordsIntoArray(stringOfKeywords){
-  var stringOfKW = stringOfKeywords;
-  var arrayOfKW = stringOfKW.split(', ').join(',').split(',')
-  return arrayOfKW
-}
-
-//checks if any of the keywords array contains the searchString (even as a substring)
-function compareKeywords(searchString, keyWordsArray){
-  for(var i=0; i<keyWordsArray.length; i++){
-    if(keyWordsArray[i].includes(searchString)){
-      return true
-    }
-  }
-  return false
-}
+// //middleware to check if user is logged in - if not, redirect to login ROUTE
+// function loggedIn(req, res, next){
+//   if(req.isAuthenticated()){
+//     next();
+//   } else {
+//     res.redirect("/login");
+//   }
+// }
+//
+// //turn string of keywords separated by commas or commas with a space to array of keywords
+// function keywordsIntoArray(stringOfKeywords){
+//   var stringOfKW = stringOfKeywords;
+//   var arrayOfKW = stringOfKW.split(', ').join(',').split(',')
+//   return arrayOfKW
+// }
 
 //==============LISTEN ON PORT 3000=======================
 app.listen(3000, function(){

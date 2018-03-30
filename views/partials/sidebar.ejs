@@ -10,16 +10,58 @@
             </div>
           </a>
         </div>
-        <div class="bubble backShadow sitePale" id="myGroupsBubble">
-          <div class="bubbleTop siteBlue menuTypeface whiteText">
-            <strong>GROUPS</strong>
-          </div>
 
-          <!-- loop through groups and add them to the sidebar, modify <a> tag -->
-          <% for (var i=0; i < allGroups.length; i++){ %>
-            <a href= <%= "/groups/" + allGroups[i]._id %> >
+        <!-- GROUPS THE USER FOLLOWS, IF DOESN'T FOLLOW ANYTHING ONLY APPEAR
+        AS A SINGLE BLUE BUBBLE FOR SEARCH - HENCE THE IF STATEMENT -->
+        <% if(allFollowed.length > 0){ %>
+          <div class="bubble backShadow sitePale">
+            <div class="bubbleTop siteBlue menuTypeface edgeBar whiteText">
+              <strong>Followed Groups</strong>
+              <a href="/groups">
+                <span class="edgeTopRight clickableEdgeItem whiteText">
+                  <i class="fas fa-search fa-sm"></i>
+                </span>
+              </a>
+            </div>
+            <!-- loop through followed groups and add them to the sidebar, last
+            one needs to be round - not in the loop modify <a> tag -->
+            <% for (var i=0; i < allFollowed.length-1; i++){ %>
+              <a class=""href= <%= "/groups/" + allFollowed[i]._id %> >
+                <div class="bubbleContent menuTypeface blueText selectionWhite">
+                    <%= allFollowed[i].name %>
+                </div>
+              </a>
+            <% } %>
+            <a class=""href= <%= "/groups/" + allFollowed[allFollowed.length-1]._id %> >
+              <div class="bubbleBottom menuTypeface blueText selectionWhite">
+                  <%= allFollowed[allFollowed.length-1].name %>
+              </div>
+            </a>
+          </div>
+        <% } else { %>
+          <div class="bubble backShadow siteBlue">
+            <div class="bubbleContent menuTypeface edgeBar whiteText">
+              <strong>Followed Groups</strong>
+              <a href="/groups">
+                <span class="edgeTopRight clickableEdgeItem whiteText">
+                  <i class="fas fa-search fa-sm"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        <% } %>
+
+
+        <!--THE USER'S GROUPS SIDEBAR BUBBLE-->
+        <div class="bubble backShadow sitePale">
+          <div class="bubbleTop siteBlue menuTypeface edgeBar whiteText">
+            <strong>My Groups</strong>
+          </div>
+          <!-- loop through my groups and add them to the sidebar, modify <a> tag -->
+          <% for (var i=0; i < allMine.length; i++){ %>
+            <a href= <%= "/groups/" + allMine[i]._id %> >
               <div class="bubbleContent sitePale menuTypeface blueText selectionWhite">
-                <%= allGroups[i].name %>
+                <%= allMine[i].name %>
               </div>
             </a>
           <% } %>

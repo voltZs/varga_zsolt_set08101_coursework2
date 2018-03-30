@@ -1,16 +1,18 @@
 .ventBody{
-  color: rgba(0,0,0, 0.9);
+  color: rgba(0,0,0, 0.7);
   font-size: 16px;
   text-align: justify;
   padding: 0 10px;
-  font-family: Arial;
 }
 
 .edgeBar{
+  transition: background-color 0.4s;
   position: relative;
+}
+
+.edgeBarStyle{
   color: rgba(0,0,0, 0.55);
   font-size: 16px;
-  font-family: Arial;
   font-weight: bold;
 }
 
@@ -45,18 +47,22 @@
   float: right;
 }
 
+.clickableEdgeItem{
+  transition: color 0.3s;
+}
+
 .clickableEdgeItem:hover{
   color: rgba(0,0,0, 0.8);
   cursor: pointer;
 }
-.rantColor:hover{
+.bubble:hover > .rantColor{
   background-color: #db4343;
 }
 
-.confessionColor:hover{
+.bubble:hover > .confessionColor{
   background-color: #7ac13c;
 }
 
-.ridiculousColor:hover{
+.bubble:hover > .ridiculousColor{
   background-color: #f7ef56;
 }
