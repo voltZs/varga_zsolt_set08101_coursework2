@@ -176,10 +176,11 @@ app.get("/groups/:groupID", loggedIn, function(req, res){
       sorting = '-favourited'; //most favourited first - descending
       break;
   }
+
   Group.findById(groupID).populate("vents").exec(function(err, foundGroup){
     if(err){
       console.log(err);
-      res.render("notFound");
+      res.render("userError", {msg: "Sorry, that group does not exist or was removed."});
     } else {
       Vent.find({_id: {$in: foundGroup.vents}}).sort(sorting).exec(function(err, foundVents){
         if(err){
@@ -268,32 +269,38 @@ app.get("/groups/:groupID/unfollow", loggedIn, function(req, res){
 
 app.get("/saved", loggedIn, function(req, res){
 
-      User.findById(req.user._id).populate("vents").populate("saved").exec(
-        function(err, foundUser){
-          if(err){
-            console.log(err);
-          } else {
-            res.render("insideSaved", {
-              VDisplay: foundUser.saved   //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name, must be an array
-            });
-          }
-        }
-      )
+  User.findById(req.user._id).populate("saved").exec(
+    function(err, foundUser){
+      if(err){
+        console.log(err);
+      } else {
+
+        res.render("insideSaved", {
+          VDisplay: foundUser.saved   //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name, must be an array
+        });
+      }
+    }
+  )
 })
 
 app.get("/originals", loggedIn, function(req, res){
-
-      User.findById(req.user._id).populate("vents").populate("saved").exec(
-        function(err, foundUser){
+  User.findById(req.user._id, function(err, foundUser){
+      if(err){
+        console.log(err);
+      } else {
+        Vent.find({_id: {$in: foundUser.vents}}).sort('-date')
+        .exec(function(err, foundVents){
           if(err){
             console.log(err);
           } else {
             res.render("insideOriginals", {
-              VDisplay: foundUser.vents})  //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name, must be an array
+              VDisplay: foundVents   //uniform name for list of vents or one vent to be displayed - ventPartial.ejs uses this name, must be an array
+            });
           }
-        }
-      )
-
+        })
+      }
+    }
+  )
 })
 
 app.get("/groups/:groupID/vent/new", loggedIn, function(req,res){
@@ -302,7 +309,7 @@ app.get("/groups/:groupID/vent/new", loggedIn, function(req,res){
   Group.findById(groupID, function(err, foundGroup){
     if(err){
       console.log(err);
-      res.render("notFound");
+      res.render("userError", {msg: "Sorry, that group does not exist or was removed."});
     } else {
       res.render("newVent", {ventGroup: foundGroup})
     }
@@ -316,6 +323,7 @@ app.get("/vent/:ventID", loggedIn, function(req,res){
     function(err, foundVent){
       if(err){
         console.log(err);
+        res.render("userError", {msg: "Sorry, that vent does not exist or was removed."});
       } else {
         res.render("vent", {
           foundVent: foundVent,
@@ -331,7 +339,7 @@ app.get("/vent/:ventID/edit", loggedIn, function(req, res){
 
   Vent.findById(ventID, function(err, foundVent){
     if(err){
-      console.log(err);
+      res.render("userError", {msg: "Sorry, we are having trouble retrieving that vent."});
     } else {
       res.render("editVent", {
         foundVent: foundVent})
@@ -346,6 +354,7 @@ app.get("/saved/:ventID/add", loggedIn, function(req, res){
   Vent.findById(ventID, function(err, foundVent){
       if(err){
         console.log(err);
+        res.render("userError", {msg: "Sorry, we are having trouble retrieving that vent."});
       } else {
         //Find user by user id of the person logged in
         User.findById(req.user._id, function(err, foundUser){
@@ -388,6 +397,7 @@ app.get("/saved/:ventID/remove", loggedIn, function(req, res){
   Vent.findById(ventID, function(err, foundVent){
       if(err){
         console.log(err);
+        res.render("userError", {msg:"Sorry, we are having trouble retrieving that vent."});
       } else {
         //Find user by user id of the person logged in
         User.findById(req.user._id, function(err, foundUser){
@@ -432,9 +442,9 @@ app.get("/logout", function(req, res){
 
 app.get("*", function(req,res){
   if(req.isAuthenticated()){
-    res.render("userError", {msg: "There's nothing here"})
+    res.render("userError", {msg: "Seems like you took the wrong turn. There's nothing here"})
   } else {
-    res.render("nonUserError", {msg: "There's nothing here"});
+    res.render("nonUserError", {msg: "Seems like you took the wrong turn. There's nothing here."});
   }
 })
 
