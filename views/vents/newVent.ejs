@@ -1,11 +1,11 @@
-<% include partials/header %>
+<% include ../partials/header %>
       <div class="leftContainer">
           <div class="bubble backShadow">
           <div class="bubbleTop siteBlue menuTypeface whiteText">
             <strong>Add VENT to <%= ventGroup.name %> </strong>
           </div>
           <div class="bubbleContent sitePale">
-            <form action="/groups/<%= ventGroup._id %>/vent" method="post" id="newVentForm">
+            <form action="/groups/<%= ventGroup._id %>/vents" method="post" id="newVentForm">
               <div class="radioContainer">
                 <div class="thirdWidthRadio">
                      <input type="radio" name="category" value="confession" id="confessionRadio">
@@ -35,8 +35,8 @@
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <% include partials/sidebar %>
+        <% include ../partials/sidebar %>
       </div>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>/vents

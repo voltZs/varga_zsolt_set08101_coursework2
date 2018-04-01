@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
       <div class="leftContainer">
 
         <% if(VDisplay.length == 0) { %>
@@ -6,21 +6,21 @@
             <div class="ventBody">
               <div class="bubbleContent">
                 <div class="commentMessage">
-                  You have no saved vents. Click the <i  class="far fa-star fa-sm"></i> icon to save vents.
+                  You have posted no vents. To do so, enter a group and click +Add Vent.
                 </div>
               </div>
             </div>
           </div>
         <% } else { %>
 
-          <% include partials/ventPartial %>
+          <% include ../partials/ventPartial %>
 
         <% } %>
       </div>
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <% include partials/sidebar %>
+        <% include ../partials/sidebar %>
       </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>

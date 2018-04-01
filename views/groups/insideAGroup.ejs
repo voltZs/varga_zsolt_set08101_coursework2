@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
       <div class="leftContainer">
           <div class="bubble backShadow" id="groupDescription">
           <div class="bubbleTop siteBlue menuTypeface whiteText edgeBar">
@@ -48,26 +48,26 @@
         </div>
 
 
-        <% include partials/sorting %>
+        <% include ../partials/sorting %>
 
-        
-        <a href=" <%= "/groups/" + ventGroup._id + "/vent/new" %> ">
+
+        <a href=" <%= "/groups/" + ventGroup._id + "/vents/new" %> ">
           <div class="addVentButton menuTypeface clickableEdgeItem">
             <i class="fas fa-plus fa-sm"></i>
             <span>Add Vent</span>
           </div>
         </a>
 
-        <% include partials/ventPartial %>
+        <% include ../partials/ventPartial %>
 
       </div>
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <% include partials/sidebar %>
+        <% include ../partials/sidebar %>
       </div>
 
       <script type="text/javascript" src="/JS/sorting.js"></script>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>

@@ -1,7 +1,7 @@
-<% include partials/header %>
+<% include ../partials/header %>
       <div class="leftContainer">
 
-        <% include partials/ventPartial %>
+        <% include ../partials/ventPartial %>
 
         <!--  COMMENTS -->
         <div class="bubble siteTransp" id="commentsPane">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="bubbleContent">
                   <div class="ventBody">
-                    <form action="/vent/<%= foundVent._id %>/comment" method="post" id="newCommentForm">
+                    <form action="/vents/<%= foundVent._id %>/comment" method="post" id="newCommentForm">
                       <textarea name="content" rows="8" cols="80" placeholder="Don't be shy"></textarea>
                     </form>
                   </div>
@@ -65,8 +65,8 @@
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <% include partials/sidebar %>
+        <% include ../partials/sidebar %>
       </div>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>

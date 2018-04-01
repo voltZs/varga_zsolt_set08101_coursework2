@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
     <div class="leftContainer">
       <div class="bubble siteTransp">
@@ -6,7 +6,7 @@
           <span class="edgeTopLeft">
             <i class="fas fa-search fa-sm "></i>
           </span>
-          <form action="/groups" method="get">
+          <form action="/groups/search" method="get">
             <input  class="searchInput siteTransp" type="text" name="search"
             value="<%= currentSearch %>" placeholder="Search for groups">
           </form>
@@ -49,7 +49,7 @@
                       <% } else { %>
                         <a href="/groups/<%= matchedGroups[i]._id %>/edit">
                           <span class="edgeRight clickableEdgeItem">
-                            Edit <i class="fas fa-pencil-alt fa-sm"></i> 
+                            Edit <i class="fas fa-pencil-alt fa-sm"></i>
                           </span>
                         </a>
                       <% } %>
@@ -71,6 +71,6 @@
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <% include partials/sidebar %>
+        <% include ../partials/sidebar %>
       </div>
-<% include partials/footer %>
+<% include ../partials/footer %>

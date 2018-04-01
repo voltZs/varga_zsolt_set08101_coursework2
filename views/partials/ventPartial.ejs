@@ -23,7 +23,7 @@
 
               <% var ventsIDs = currentUser.vents.map(function(aVent){return String(aVent)}); %>
               <% if(ventsIDs.includes(String(VDisplay[i]._id))){     %>
-                <a href="/vent/<%= VDisplay[i]._id %>/edit">
+                <a href="/vents/<%= VDisplay[i]._id %>/edit">
                   <span class="edgeTopRight clickableEdgeItem">
                     <i class="fas fa-pencil-alt fa-sm"></i>
                   </span>
@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="bubbleBottom edgeBar edgeBarStyle">
-              <a href="/vent/<%= VDisplay[i]._id %>">
+              <a href="/vents/<%= VDisplay[i]._id %>">
                 <span class="edgeBotLeft clickableEdgeItem">
                   <i class="fas fa-comment fa-sm"></i>
                   <%= VDisplay[i].comments.length         %>
@@ -50,14 +50,14 @@
 
               <% var savedIDs = currentUser.saved.map(function(aVent){return String(aVent)}); %>
               <% if(!savedIDs.includes(String(VDisplay[i]._id))){    %>
-                <a href="/saved/<%= VDisplay[i]._id %>/add">
+                <a href="/vents/<%= VDisplay[i]._id %>/save">
                   <span class="edgeBotRight clickableEdgeItem">
                     <%= VDisplay[i].favourited %>
                     <i class="far fa-star fa-sm" id="favouritedIcon"></i>
                   </span>
                 </a>
               <% } else { %>
-                <a href="/saved/<%= VDisplay[i]._id %>/remove">
+                <a href="/vents/<%= VDisplay[i]._id %>/unsave">
                   <span class="edgeBotRight clickableEdgeItem">
                     <%= VDisplay[i].favourited %>
                     <i class="fas fa-star fa-sm" id="favouritedIcon"></i>

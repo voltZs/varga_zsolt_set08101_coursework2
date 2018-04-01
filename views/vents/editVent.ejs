@@ -1,11 +1,11 @@
-<% include partials/header %>
+<% include ../partials/header %>
       <div class="leftContainer">
           <div class="bubble backShadow">
           <div class="bubbleTop siteBlue menuTypeface whiteText">
             <strong>Edit VENT</strong>
           </div>
           <div class="bubbleContent sitePale">
-            <form action="/vent/<%= foundVent._id %>?_method=PUT" method="post" id="newVentForm">
+            <form action="/vents/<%= foundVent._id %>?_method=PUT" method="post" id="newVentForm">
               <div class="radioContainer">
                 <div class="thirdWidthRadio">
                      <input type="radio" name="category" value="confession"
@@ -33,7 +33,7 @@
             </form>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
-            <form action="/vent/<%= foundVent._id %>?_method=DELETE" method="post">
+            <form action="/vents/<%= foundVent._id %>?_method=DELETE" method="post">
               <span class="edgeBotLeft deleteHover grayText" onclick="javascript:this.parentNode.submit()">
                 <i class="fas fa-trash fa-sm"></i> Delete
               </span>
@@ -50,8 +50,8 @@
 
       <!-- righandside sidebar -->
       <div class="rightContainer">
-        <% include partials/sidebar %>
+        <% include ../partials/sidebar %>
       </div>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>

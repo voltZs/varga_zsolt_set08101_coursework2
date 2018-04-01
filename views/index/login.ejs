@@ -1,26 +1,24 @@
-<% include partials/header %>
+<% include ../partials/header %>
       <div class="bubble backShadow formBubble" id="groupDescription">
         <div class="bubbleTop siteBlue menuTypeface whiteText">
-          <strong>Register to VENT</strong>
+          <strong>Log into your VENT account</strong>
         </div>
         <div class="bubbleContent sitePale">
-          <form action="/register" method="post" id="registerForm">
+          <form action="/login" method="post" id="loginForm">
             <input type="text" name="username" placeholder="username">
-            <input type="email" name="email" placeholder="e-mail address">
             <input type="password" name="password" placeholder="password">
           </form>
         </div>
         <div class="bubbleBottom sitePale">
-          <button type="submit" form="registerForm" value="Register"
+          <button type="submit" form="loginForm" value="Submit"
           class="formButton siteBlue  whiteText">
-            Register
+            Log In
           </button>
         </div>
       </div>
-
       <div class="container100 lightGrayText regTextCenter">
-        Alredy a member?
-        <a href="/login" class="clickableEdgeItem">Log In</a>
+        Not a member yet?
+        <a href="/register" class="clickableEdgeItem">Register</a>
       </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
