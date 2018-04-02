@@ -4,7 +4,7 @@ var functions = require("../functions");
 var Group    = require("../models/group");
 var Vent     = require("../models/vent");
 
-router.put("/vents/:ventID", functions.loggedIn, function(req, res){
+router.put("/vents/:ventID", functions.ownsVent, function(req, res){
   var ventID = req.params.ventID;
 
   Vent.findByIdAndUpdate(ventID,
@@ -18,7 +18,7 @@ router.put("/vents/:ventID", functions.loggedIn, function(req, res){
     })
 })
 
-router.put("/groups/:groupID", functions.loggedIn, function(req, res){
+router.put("/groups/:groupID", functions.ownsGroup, function(req, res){
   var groupID = req.params.groupID;
 
   Group.findById(groupID, function(err, foundGroup){
