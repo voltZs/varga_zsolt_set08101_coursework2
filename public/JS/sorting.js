@@ -28,21 +28,12 @@ sortSelection.appendChild(sorts[currentSort]);
 sortContainer.addEventListener("click", function(){
   if(enlarged){
     enlarged = false;
-  } else(
-    enlarged = true
-  )
+  } else{
+    enlarged = true;
+  }
 
   refreshSortDisplay();
 });
-
-for(var i=0; i<sorts.length; i++){
-  sorts[i].addEventListener("click", function(){
-    if(enlarged){
-      currentSort = sorts.indexOf(this);
-      sortSelection.innerHTML = sorts[i];
-    }
-  })
-}
 
 function refreshSortDisplay(){
   if(enlarged){

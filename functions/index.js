@@ -1,5 +1,6 @@
 var functions = {};
-var Group = require("../models/group")
+var Group = require("../models/group");
+var Vent = require("../models/vent");
 
 //middleware to check if user is logged in - if not, redirect to login ROUTE
 functions.loggedIn = function(req, res, next){
@@ -12,12 +13,19 @@ functions.loggedIn = function(req, res, next){
 
 functions.ownsVent = function(req, res, next){
   if(req.isAuthenticated()){
-    for(var i = 0; i<req.user.vents; i++){
-      if(String(req.params.ventID) === String(req.user.vents[i])){
-        next();
+    Vent.findById(req.params.ventID, function(err, foundVent){
+      if(err){
+        console.log(err);
+      } else {
+        for(var i = 0; i<req.user.vents.length; i++){
+          console.log(req.user.vents[i]);
+          if(String(foundVent._id) === String(req.user.vents[i])){
+            return next();
+          }
+        }
+        res.render("index/userError", {msg: "You do not own this vent."});
       }
-    }
-    res.render("index/userError", {msg: "You do not own this vent."});
+    })
   } else {
     res.redirect("/login")
   }

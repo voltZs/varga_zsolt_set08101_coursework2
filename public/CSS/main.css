@@ -59,6 +59,13 @@ a{
   box-sizing: border-box;
 }
 
+.verticalCentContainer{
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+}
+
 .leftContainer{
   display: inline-block;
   width: 62%;
