@@ -27,9 +27,6 @@ var Group    = require("./models/group");
 var Vent     = require("./models/vent");
 var VComment = require("./models/comment");
 
-var seedDB = require("./seedDB");
-seedDB();
-
 
 app.set("view engine", "ejs");
 app.use(express.static("public"))

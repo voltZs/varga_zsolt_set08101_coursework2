@@ -141,14 +141,12 @@ router.post("/register", function(req, res){
         } else {
           passport.authenticate('local')(req, res, function(){
             Group.findOne({name: "VentTeam"}, function(err, foundGroup){
-              savedUser.groups.push(foundGroup._id);
-              savedUser.save(function(err){
-                if(err){
-                  console.log(err);
-                } else {
-                  res.redirect("/welcome");
-                }
-              })
+              if(err){
+                console.log(err);
+                res.redirect("/register");
+              } else {
+                res.redirect("/welcome");
+              }
             })
           });
         }

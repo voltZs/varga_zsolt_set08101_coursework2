@@ -13,18 +13,12 @@ router.get("/", function(req, res){
 router.get("/welcome", functions.loggedIn, function(req,res){
   var yesterday = new Date();
   yesterday.setDate(yesterday.getDate()-1);
-
+  
   var limitPop;
   if(req.query.limitPop == undefined){
     limitPop = 3;
   } else {
     limitPop = parseInt(req.query.limitPop);
-  }
-  var limitRec;
-  if(req.query.limitRec == undefined){
-    limitRec = 3;
-  } else {
-    limitRec = parseInt(req.query.limitRec);
   }
 
   Group.find({_id: {$in: req.user.groups}}, function(err, foundGroups){
@@ -43,15 +37,14 @@ router.get("/welcome", functions.loggedIn, function(req,res){
         if(err){
           console.log(err);
         } else {
-          Vent.find({_id: {$in: ventIDs}}).sort('-date').limit(limitRec).exec(function(err, foundVents2){
+          Group.find({}).limit(limitPop).exec(function(err, allGroups){
             if(err){
               console.log(err);
             } else {
               res.render("index/landing", {
                 popularVents: foundVents1,
-                recentVents: foundVents2,
                 limitPop: limitPop,
-                limitRec: limitRec
+                matchedGroups: allGroups
               });
             }
           })

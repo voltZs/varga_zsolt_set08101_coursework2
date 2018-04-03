@@ -1,55 +1,106 @@
 <% include ../partials/header %>
       <div class="leftContainer">
 
-        <div class="bubble sitePale backShadow grayText">
-          <div class="ventBody">
-            <div class="bubbleContent">
-              <h2>Welcome back, <%= currentUser.username %>!</h2>
-              <h3>We though you might want to have a look at these vents</h3>
-            </div>
-          </div>
-        </div>
-        <div class="bubble siteTransp">
-          <div class="bubbleTop  edgeBar edgeBarStyle">
-            <div class="edgeTopLeft">
-              Most starred vents in the last 24 hours
-            </div>
-          </div>
-          <div class="ventBody">
-            <div class="bubbleContent">
-              <% var VDisplay = popularVents; %>
-              <% include ../partials/ventPartial %>
-            </div>
-          </div>
-          <div class="bubbleBottom  edgeBar edgeBarStyle">
-            <a href="/welcome?limitPop=<%= limitPop + 3 %>">
-              <div class="contrainer100 regTextCenter clickableEdgeItem">
-                More
-              </div>
-            </a>
-          </div>
-        </div>
+        <% if(currentUser.groups.length>0){ %>
 
-        <div class="bubble siteTransp">
-          <div class="bubbleTop edgeBar edgeBarStyle">
-            <div class="edgeTopLeft">
-              And a few of the most recent vents
-            </div>
-          </div>
-          <div class="ventBody">
-            <div class="bubbleContent">
-                <% var VDisplay = recentVents; %>
-                <% include ../partials/ventPartial %>
-            </div>
-          </div>
-          <div class="bubbleBottom  edgeBar edgeBarStyle">
-            <a href="/welcome?limitRec=<%= limitRec + 3 %>">
-              <div class="contrainer100 regTextCenter clickableEdgeItem">
-                More
+
+          <div class="bubble sitePale backShadow grayText">
+            <div class="ventBody">
+              <div class="bubbleContent">
+                <h2>Welcome back, <%= currentUser.username %>!</h2>
+                <h3>We though you might want to have a look at these vents</h3>
               </div>
-            </a>
+            </div>
           </div>
-        </div>
+          <div class="bubble siteTransp">
+            <div class="bubbleTop  edgeBar edgeBarStyle">
+              <div class="edgeTopLeft">
+                Most starred vents in the last 24 hours
+              </div>
+            </div>
+            <div class="ventBody">
+              <div class="bubbleContent">
+                <% var VDisplay = popularVents; %>
+                <% include ../partials/ventPartial %>
+              </div>
+            </div>
+            <div class="bubbleBottom  edgeBar edgeBarStyle">
+              <a href="/welcome?limitPop=<%= limitPop + 3 %>">
+                <div class="contrainer100 regTextCenter clickableEdgeItem">
+                  More
+                </div>
+              </a>
+            </div>
+          </div>
+
+
+
+        <% } else { %>
+
+
+
+          <div class="bubble sitePale backShadow grayText">
+            <div class="ventBody">
+              <div class="bubbleContent">
+                <h2>Welcome, <%= currentUser.username %>!</h2>
+                <h3>Before you start venting, have a look at these groups</h3>
+              </div>
+            </div>
+          </div>
+          <div class="bubble siteTransp">
+            <div class="bubbleTop  edgeBar edgeBarStyle">
+              <div class="edgeTopLeft">
+                There must be something you like
+              </div>
+            </div>
+            <%  for(var i =0; i < matchedGroups.length; i++){ %>
+              <div class="ventBody">
+                <div class="commentBubble sitePale">
+                  <div class="ventBody">
+                    <div class="bubbleContent edgeBar edgeBarStyle">
+                      <a href="/groups/<%= matchedGroups[i]._id %>">
+                        <div class="edgeLeft clickableEdgeItem">
+                          <%= matchedGroups[i].name %>
+                        </div>
+                      </a>
+                      <%if(String(matchedGroups[i].creator) !== String(currentUser._id)){ %>
+                        <% var followedGroups = currentUser.groups.map(function(group){ return String(group)}); %>
+                        <% if(followedGroups.includes(String(matchedGroups[i]._id))){ %>
+                          <a href="/groups/<%= matchedGroups[i]._id %>/unfollow">
+                            <span class="edgeRight clickableEdgeItem">
+                              Unfollow
+                            </span>
+                          </a>
+                        <% } else { %>
+                        <a href="/groups/<%= matchedGroups[i]._id %>/follow">
+                          <span class="edgeRight clickableEdgeItem">
+                            Follow
+                          </span>
+                        </a>
+                        <% } %>
+                      <% } else { %>
+                        <a href="/groups/<%= matchedGroups[i]._id %>/edit">
+                          <span class="edgeRight clickableEdgeItem">
+                            Edit <i class="fas fa-pencil-alt fa-sm"></i>
+                          </span>
+                        </a>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+
+            <div class="bubbleBottom  edgeBar edgeBarStyle">
+              <a href="/welcome?limitPop=<%= limitPop + 3 %>">
+                <div class="contrainer100 regTextCenter clickableEdgeItem">
+                  More
+                </div>
+              </a>
+            </div>
+          </div>
+        <% } %>
+
 
       </div>
 
