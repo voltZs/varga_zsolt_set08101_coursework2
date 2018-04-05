@@ -109,6 +109,10 @@ a{
   padding-left: 20px;
   width: 66.6%;
 }
+.container40mid{
+  width: 40%;
+  margin: 0 auto;
+}
 
 .imageContainer{
   height: 115px;
@@ -192,6 +196,10 @@ div.container100 div.bubble:last-of-type{
   opacity: 1
 }
 
+.errorContent{
+  padding: 30px 0;
+}
+
 .bubbleComContent{
   transition: 0.3s;
   padding: 0 6px;
@@ -217,6 +225,10 @@ div.container100 div.bubble:last-of-type{
 
 .greyImg{
     opacity: 0.55;
+}
+
+.messageImg{
+    opacity: 0.3;
 }
 
 .redHoverImg:hover{

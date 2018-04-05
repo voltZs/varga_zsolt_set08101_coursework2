@@ -260,8 +260,13 @@ router.get("/vents/:ventID/edit", functions.loggedIn, function(req, res){
     if(err){
       res.render("index/userError", {msg: "Sorry, we are having trouble retrieving that vent."});
     } else {
-      res.render("vents/editVent", {
-        foundVent: foundVent})
+      var listOfVents = req.user.vents.map(function(id){return String(id)});
+      if(listOfVents.includes(String(foundVent._id))){
+        res.render("vents/editVent", {
+          foundVent: foundVent})
+      } else {
+        res.render("index/userError", {msg: "You do not have permission to edit that vent"});
+      }
     }
   })
 
