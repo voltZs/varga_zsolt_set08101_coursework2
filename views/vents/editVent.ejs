@@ -5,31 +5,35 @@
             <strong>Edit VENT</strong>
           </div>
           <div class="bubbleContent sitePale">
-            <form action="/vents/<%= foundVent._id %>?_method=PUT" method="post" id="newVentForm">
+            <form action="/vents/<%= foundVent._id %>?_method=PUT" method="post" id="ventForm">
               <div class="radioContainer">
                 <div class="thirdWidthRadio">
                      <input type="radio" name="category" value="confession"
                      <% if(foundVent.category == "confession"){ %>
                        checked="checked"
                      <% } %> id="confessionRadio">
-                     <label for="confessionRadio">Confession</label>
+                     <label for="confessionRadio" class="clickableEdgeItem">Confession</label>
                    </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
              --><div class="thirdWidthRadio">
                   <input type="radio" name="category" value="rant"
                   <% if(foundVent.category == "rant"){ %>
                     checked="checked"
                   <% } %> id="rantRadio">
-                  <label for="rantRadio">Rant</label>
+                  <label for="rantRadio" class="clickableEdgeItem">Rant</label>
                 </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
              --><div class="thirdWidthRadio">
                   <input type="radio" name="category" value="ridiculous"
                   <% if(foundVent.category == "ridiculous"){ %>
                     checked="checked"
                   <% } %>id="ridiculousRadio">
-                  <label for="ridiculousRadio">Ridiculous</label>
+                  <label for="ridiculousRadio" class="clickableEdgeItem">Ridiculous</label>
                 </div>
               </div>
-              <textarea name="content" rows="8" cols="80" placeholder="Just let it out." required><%= foundVent.content %></textarea>
+
+              <input type="hidden" name="content">
+              <div id="editorDivQuill">
+              </div>
+
             </form>
           </div>
           <div class="bubbleBottom sitePale edgeBar">
@@ -39,7 +43,7 @@
               </span>
             </form>
 
-            <button type="submit" form="newVentForm" value="Vent"
+            <button type="submit" form="ventForm" value="Vent"
             class="formButton siteBlue  whiteText">
               SAVE
             </button>
@@ -52,6 +56,12 @@
       <div class="rightContainer">
         <% include ../partials/sidebar %>
       </div>
+
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script type="text/javascript">
+        var content = <%- JSON.stringify(foundVent.content) %> ;
+      </script>
+      <script type="text/javascript" src="/JS/richTextEditing.js"></script>
 
 
 <% include ../partials/footer %>

@@ -30,7 +30,9 @@ var VComment = require("./models/comment");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"))
-app.use(bodyParser.urlencoded({extended: true}));
+//allows request body to be up to 5mb - mainly for images
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 app.use(expressesh({
   secret: "Venting makes your life easier",
   resave: false,

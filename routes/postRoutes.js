@@ -18,7 +18,7 @@ router.post("/groups", functions.loggedIn, function(req, res){
       if(err){
         console.log(err);
       } else {
-        console.log("DB added group: " + savedGroup);
+        console.log("DB added group: " + savedGroup._id);
         res.redirect("/groups/" + savedGroup._id);
       }
     })
@@ -35,7 +35,7 @@ router.post("/groups/:groupID/vents", functions.loggedIn, function(req, res){
         if(err){
           console.log(err);
         } else {
-          console.log("DB added vent:" + savedVent);
+          console.log("DB added vent:" + savedVent._id);
           //push vent into group's vents array
           Group.findById(groupID, function(err, foundGroup){
             if(err){
@@ -103,7 +103,7 @@ router.post("/vents/:ventID/comment", functions.loggedIn, function(req, res){
                     if(err){
                       console.log(err);
                     } else {
-                      console.log("DB added Vcomment: " + savedComment);
+                      console.log("DB added Vcomment: " + savedComment._id);
                       console.log("...to vent ID: " + foundVent._id);
                       res.redirect("/vents/" + ventID);
                     }

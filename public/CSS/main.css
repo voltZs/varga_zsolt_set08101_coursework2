@@ -210,6 +210,29 @@ div.container100 div.bubble:last-of-type{
   max-width: 100%;
 }
 
+.paleImg{
+  filter: invert(100%);
+  opacity: 0.8;
+}
+
+.greyImg{
+    opacity: 0.55;
+}
+
+.redHoverImg:hover{
+  opacity: 1;
+  filter: invert(34%) sepia(73%) saturate(825%) hue-rotate(319deg) brightness(95%) contrast(104%);
+}
+
+.greenHoverImg:hover{
+  opacity: 1;
+  filter: invert(62%) sepia(68%) saturate(418%) hue-rotate(49deg) brightness(96%) contrast(87%);
+}
+
+.yellowHoverImg:hover{
+  filter: invert(87%) sepia(98%) saturate(456%) hue-rotate(336deg) brightness(107%) contrast(94%);
+}
+
 .siteBlue{
   background-color: rgba(48, 126, 193, 1);
   /* background-color: #4894D6; */
@@ -325,6 +348,9 @@ label:hover{
 
 
 
+
+
+
 textarea{
   box-sizing: border-box;
   border: none;
@@ -337,6 +363,34 @@ textarea{
   font-size: 16px;
   text-align: center;
   resize: none;
+}
+
+#editorDivQuill{
+  font-family: inherit;
+  box-sizing: border-box;
+  border: none;
+  width: 100%;
+  height: 160px;
+  background-color: white;
+  text-align: justify;
+  margin: 0 auto;
+  display: block;
+  font-size: 16px;
+}
+
+div.bubbleContent .ql-snow.ql-toolbar{
+  border: none;
+  text-align: center;
+}
+
+div.bubbleContent .ql-container{
+  border:none;
+}
+
+div.displayDivQuill .ql-editor{
+  padding: 0;
+  font-family: inherit;
+  font-size: 16px;
 }
 
 textarea:focus{

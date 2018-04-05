@@ -18,8 +18,9 @@
 
           </div>
           <div class="bubbleContent sitePale">
-            <div class="ventBody">
-              <%= ventGroup.description %>
+            <div class="ventBody displayDivQuill">
+              <% var displayContents = [] ; %>
+              <% displayContents.push(ventGroup.description); %>
             </div>
           </div>
           <div class="bubbleBottom sitePale edgeBar edgeBarStyle">
@@ -58,6 +59,10 @@
           </div>
         </a>
 
+        <script type="text/javascript">
+          var displayConts = <%- JSON.stringify(displayContents) %>;
+        </script>
+        
         <% include ../partials/ventPartial %>
 
       </div>
@@ -68,6 +73,7 @@
       </div>
 
       <script type="text/javascript" src="/JS/sorting.js"></script>
+
 
 
 <% include ../partials/footer %>

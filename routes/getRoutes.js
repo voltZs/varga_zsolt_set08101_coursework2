@@ -13,7 +13,7 @@ router.get("/", function(req, res){
 router.get("/welcome", functions.loggedIn, function(req,res){
   var yesterday = new Date();
   yesterday.setDate(yesterday.getDate()-1);
-  
+
   var limitPop;
   if(req.query.limitPop == undefined){
     limitPop = 3;
@@ -99,8 +99,7 @@ router.get("/groups/:groupID", functions.loggedIn, function(req, res){
   }
 
   Group.findById(groupID).populate("vents").exec(function(err, foundGroup){
-    if(err){
-      console.log(err);
+    if(err || foundGroup == null){
       res.render("index/userError", {msg: "Sorry, that group does not exist or was removed."});
     } else {
       Vent.find({_id: {$in: foundGroup.vents}}).sort(sorting).exec(function(err, foundVents){
@@ -228,7 +227,7 @@ router.get("/groups/:groupID/vents/new", functions.loggedIn, function(req,res){
   var groupID = req.params.groupID;
 
   Group.findById(groupID, function(err, foundGroup){
-    if(err){
+    if(err || foundGroup == null){
       console.log(err);
       res.render("index/userError", {msg: "Sorry, that group does not exist or was removed."});
     } else {
@@ -242,8 +241,7 @@ router.get("/vents/:ventID", functions.loggedIn, function(req,res){
 
   Vent.findById(ventID).populate({path: "comments", populate: {path: "user"}}).exec(
     function(err, foundVent){
-      if(err){
-        console.log(err);
+      if(err || foundVent == null) {
         res.render("index/userError", {msg: "Sorry, that vent does not exist or was removed."});
       } else {
         res.render("vents/vent", {

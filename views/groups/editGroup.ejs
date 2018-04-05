@@ -5,11 +5,17 @@
             <strong>Edit Group: <%= ventGroup.name %></strong>
           </div>
           <div class="bubbleContent sitePale">
-            <form action="/groups/<%= ventGroup._id %>?_method=PUT" method="post" id="editGroupForm">
+
+            <form action="/groups/<%= ventGroup._id %>?_method=PUT" method="post" id="groupForm">
               <input type="text" name="name" placeholder="group name" value="<%= ventGroup.name %>">
               <input type="text" name="keywords" placeholder="add new keywords separated by commas">
-              <textarea name="description" rows="8" cols="80" placeholder="description and rules of group"><%= ventGroup.description %></textarea>
+
+              <input type="hidden" name="description">
+              <div id="editorDivQuill">
+              </div>
+
             </form>
+
           </div>
           <div class="bubbleBottom sitePale edgeBar">
             <form action="/groups/<%= ventGroup._id %>?_method=DELETE" method="post">
@@ -18,7 +24,7 @@
               </span>
             </form>
 
-            <button type="submit" form="editGroupForm" value="Vent"
+            <button type="submit" form="groupForm" value="Vent"
             class="formButton siteBlue  whiteText">
               SAVE
             </button>
@@ -32,5 +38,10 @@
         <% include ../partials/sidebar %>
       </div>
 
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script type="text/javascript">
+        var content = <%- JSON.stringify(ventGroup.description) %> ;
+      </script>
+      <script type="text/javascript" src="/JS/richTextEditing.js"></script>
 
 <% include ../partials/footer %>

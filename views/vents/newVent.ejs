@@ -4,31 +4,39 @@
           <div class="bubbleTop siteBlue menuTypeface whiteText">
             <strong>Add VENT to <%= ventGroup.name %> </strong>
           </div>
-          <div class="bubbleContent sitePale">
-            <form action="/groups/<%= ventGroup._id %>/vents" method="post" id="newVentForm">
-              <div class="radioContainer">
-                <div class="thirdWidthRadio">
-                     <input type="radio" name="category" value="confession" id="confessionRadio">
-                     <label for="confessionRadio">Confession</label>
-                   </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
-             --><div class="thirdWidthRadio">
-                  <input type="radio" name="category" value="rant" checked="checked" id="rantRadio">
-                  <label for="rantRadio">Rant</label>
-                </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
-             --><div class="thirdWidthRadio">
-                  <input type="radio" name="category" value="ridiculous" id="ridiculousRadio">
-                  <label for="ridiculousRadio">Ridiculous</label>
+          <form action="/groups/<%= ventGroup._id %>/vents" method="post" id="ventForm">
+            <div class="bubbleContent sitePale">
+
+                <div class="radioContainer">
+                  <div class="thirdWidthRadio">
+                       <input type="radio" name="category" value="confession" id="confessionRadio">
+                       <label for="confessionRadio" class="clickableEdgeItem">Confession</label>
+                     </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
+               --><div class="thirdWidthRadio">
+                    <input type="radio" name="category" value="rant" checked="checked" id="rantRadio">
+                    <label for="rantRadio" class="clickableEdgeItem">Rant</label>
+                  </div><!--REMOVE WHITE SPACE BETWEEN INLINE BLOCKS
+               --><div class="thirdWidthRadio">
+                    <input type="radio" name="category" value="ridiculous" id="ridiculousRadio">
+                    <label for="ridiculousRadio" class="clickableEdgeItem">Ridiculous</label>
+                  </div>
                 </div>
-              </div>
-              <textarea name="content" rows="8" cols="80" placeholder="Just let it out."></textarea>
-            </form>
-          </div>
-          <div class="bubbleBottom sitePale">
-            <button type="submit" form="newVentForm" value="Vent"
-            class="formButton siteBlue  whiteText">
-              VENT!
-            </button>
-          </div>
+
+                <!-- <textarea name="content" rows="8" cols="80" placeholder="Just let it out."></textarea>  -->
+                <input type="hidden" name="content">
+                <div id="editorDivQuill">
+                </div>
+
+            </div>
+
+            <div class="bubbleBottom sitePale">
+              <button type="submit" form="ventForm" value="Vent"
+              class="formButton siteBlue  whiteText">
+                VENT!
+              </button>
+            </div>
+
+          </form>
         </div>
 
       </div>
@@ -37,6 +45,10 @@
       <div class="rightContainer">
         <% include ../partials/sidebar %>
       </div>
+
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script type="text/javascript" src="/JS/richTextEditing.js"></script>
+
 
 
 <% include ../partials/footer %>/vents

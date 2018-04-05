@@ -5,14 +5,18 @@
             <strong>Create new VENT group</strong>
           </div>
           <div class="bubbleContent sitePale">
-            <form action="/groups" method="post" id="newgroupForm">
+            <form action="/groups" method="post" id="groupForm">
               <input type="text" name="name" placeholder="group name">
               <input type="text" name="keywords" placeholder="keywords separated by commas">
-              <textarea name="description" rows="8" cols="80" placeholder="description and rules of group"></textarea>
+
+              <input type="hidden" name="description">
+              <div id="editorDivQuill">
+              </div>
+
             </form>
           </div>
           <div class="bubbleBottom sitePale">
-            <button type="submit" form="newgroupForm" value="Creategroup"
+            <button type="submit" form="groupForm" value="Creategroup"
             class="formButton siteBlue  whiteText">
               Create Group
             </button>
@@ -26,5 +30,8 @@
         <% include ../partials/sidebar %>
       </div>
 
+
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script type="text/javascript" src="/JS/richTextEditing.js"></script>
 
 <% include ../partials/footer %>
