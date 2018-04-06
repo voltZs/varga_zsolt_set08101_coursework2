@@ -5,7 +5,6 @@ html{
 }
 
 body{
-  position: relative;
   font-family: 'Roboto', sans-serif;
   margin: 0;
   height: 100%;
@@ -51,7 +50,6 @@ a{
 .mainContainer{
   position: relative;
   margin: 0 auto;
-  height: auto !important;
   padding-bottom: 90px; /*for footer */
   min-height: 100%;
   width: 60%;
@@ -73,10 +71,23 @@ a{
 }
 
 .rightContainer{
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
   float: right;
   width: 35%;
   box-sizing: border-box;
+  min-height: 100%;
+}
+
+.sideBarContainer{
+  position: relative;
+}
+
+.stickyCont{
+  position: sticky;
+  top: 50px;
 }
 
 .container100{
@@ -154,7 +165,7 @@ a{
 }
 
 div.container100 div.bubble:last-of-type{
-  margin: 0;
+  /* margin: 0; */
 }
 
 .commentBubble{
@@ -212,6 +223,12 @@ div.container100 div.bubble:last-of-type{
   opacity: 1
 }
 
+.backgroundImageContainer{
+  position: absolute;
+  top: -450px;
+  left: -350px;
+}
+
 .indexImg{
   object-fit: contain;
   max-height: 100%;
@@ -229,6 +246,11 @@ div.container100 div.bubble:last-of-type{
 
 .messageImg{
     opacity: 0.3;
+}
+
+.backgroundImage{
+  opacity: 0.25;
+  filter: invert(100%);
 }
 
 .redHoverImg:hover{

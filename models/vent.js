@@ -5,7 +5,10 @@ var ventSchema = mongoose.Schema({
     type: Date,
     default: Date.now
     },
-  content: String,
+  content: {
+    type: String,
+    required: true
+    },
   category: {
     type: String,
     enum: ['rant', 'confession', 'ridiculous'],
@@ -17,9 +20,9 @@ var ventSchema = mongoose.Schema({
     default: 0
     },
   comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "VComment"
-      }]
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "VComment"
+    }]
 });
 
 var Vent = mongoose.model("Vent", ventSchema);
