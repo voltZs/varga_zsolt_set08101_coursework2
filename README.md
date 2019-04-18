@@ -9,3 +9,7 @@ To get the server running, follow these steps:
   4. run: node app.js
 
 The website should now be accessible on localhost port 3000.
+
+## More about the application and the development process can be found in vent-report.pdf
+
+![Alt text](preview.jpg "Preview of platform")
